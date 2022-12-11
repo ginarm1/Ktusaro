@@ -1,0 +1,27 @@
+version: '3.4'
+
+services:
+  postgres:
+    image: postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: bulve
+      POSTGRES_DB: ktusaro
+      #this ENV variable is only required for the healthcheck section - if you don't specify it, the check command will fail stating the root user doesn't exist in posgres
+      PGUSER: "postgres"
+    ports:
+      - "5432:5432"    
+    restart: unless-stopped
+    healthcheck:
+      #CHANGE 1: this command checks if the database is ready, right on the source db server
+      test: [ "CMD-SHELL", "pg_isready -d ktusaro" ]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+  liquibase:
+    build: ./liquibase/
+    depends_on:
+      #CHANGE 2: it prevents issuing a request while the server is starting to depend on the healthy status of postgres-db 
+      postgres:
+        condition: service_healthy
+     
