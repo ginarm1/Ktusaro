@@ -9,6 +9,11 @@ namespace Ktusaro.Services.Services
     {
         private readonly IEventRepository _eventRepository;
 
+        public EventService(IEventRepository eventRepository)
+        {
+            _eventRepository = eventRepository;
+        }
+
         public async Task<List<Event>> GetAll()
         {
             var events = await _eventRepository.GetAll();

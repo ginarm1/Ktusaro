@@ -1,7 +1,13 @@
+using Ktusaro.WebApp;
+using Ktusaro.WebApp.MappingProfiles;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.ConfigureServices(builder.Configuration);
+builder.Services.AddAutoMapper(typeof(MainMappingProfile));
 
 var app = builder.Build();
 

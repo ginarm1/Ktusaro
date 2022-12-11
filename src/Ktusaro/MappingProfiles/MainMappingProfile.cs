@@ -8,7 +8,7 @@ namespace Ktusaro.WebApp.MappingProfiles
     {
         public MainMappingProfile()
         {
-            CreateMap<EventDto, Event>();
+            CreateMap<EventDto, Event>().ReverseMap();
         }
     }
 }

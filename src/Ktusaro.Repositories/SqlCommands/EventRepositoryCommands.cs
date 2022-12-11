@@ -11,7 +11,7 @@ namespace Ktusaro.Repositories.SqlCommands
         internal static string GetAll()
         {
             return @"SELECT *
-	                FROM public.\""event\"" ";
+	                FROM public.event";
         }
     }
 }
