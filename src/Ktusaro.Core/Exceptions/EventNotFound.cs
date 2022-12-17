@@ -1,8 +1,8 @@
 ﻿namespace Ktusaro.Core.Exceptions
 {
-    public class EventNotFound : Exception
+    public class EventNotFound : EntityNotFoundException
     {
-        public EventNotFound() : base("Event was not found")
+        public EventNotFound() : base("notFound","Event was not found")
         {
         }
     }

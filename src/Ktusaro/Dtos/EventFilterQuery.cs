@@ -1,6 +1,6 @@
 ﻿namespace Ktusaro.WebApp.Dtos
 {
-    public class EventFilterDto
+    public class EventFilterQuery
     {
         public int Id { get; set; }
         /// <example>Vidinis</example>

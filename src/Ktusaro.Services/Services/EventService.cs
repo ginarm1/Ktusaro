@@ -37,14 +37,14 @@ namespace Ktusaro.Services.Services
 
         public async Task<Event> GetById(int id)
         {
-            var kudos = await _eventRepository.GetById(id);
+            var @event = await _eventRepository.GetById(id);
 
-            if (kudos == null)
+            if (@event == null)
             {
                 throw new EventNotFound();
             }
 
-            return kudos;
+            return @event;
         }
 
         public async Task<List<Event>> GetByEventType(string eventType)

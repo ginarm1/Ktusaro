@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Ktusaro.Core.Exceptions
 {
-    public class EventTypeNotFound : Exception
+    public class EventTypeNotFound : EntityNotFoundException
     {
-        public EventTypeNotFound() : base("Event type was not found")
+        public EventTypeNotFound() : base("notFound","Event type was not found")
         {
         }
     }

@@ -3,7 +3,7 @@ using System.ComponentModel;
 
 namespace Ktusaro.WebApp.Dtos
 {
-    public class CreateEventDto
+    public class CreateEventRequest
     {
         [Key]
         [Required]
@@ -58,5 +58,8 @@ namespace Ktusaro.WebApp.Dtos
 
         [DisplayName("Atvykusių dalyvių kiekis")]
         public int? PeopleCount { get; set; }
+
+        [Required]
+        public int? EventType { get; set; }
     }
 }

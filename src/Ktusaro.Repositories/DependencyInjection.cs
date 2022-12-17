@@ -15,6 +15,7 @@ namespace Ktusaro.Repositories
             services.AddTransient((sp) => new NpgsqlConnection(connectionString));
 
             services.AddTransient<IEventRepository, EventRepository>();
+            services.AddTransient<ISponsorRepository, SponsorRepository>();
         }
     }
 }
