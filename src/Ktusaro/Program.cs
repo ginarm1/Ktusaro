@@ -1,5 +1,6 @@
 using Ktusaro.WebApp;
 using Ktusaro.WebApp.MappingProfiles;
+using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,7 +9,10 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.ConfigureServices(builder.Configuration);
 builder.Services.AddAutoMapper(typeof(MainMappingProfile));
-
+builder.Services.AddSwaggerGen(c =>
+{
+    c.SwaggerDoc("v1", new OpenApiInfo { Title = "Ktusaro", Version = "v1" });
+});
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -19,6 +23,11 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
+app.UseSwagger();
+app.UseSwaggerUI(c =>
+{
+    c.SwaggerEndpoint("v1/swagger.json", "Ktusaro");
+});
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 

@@ -1,12 +1,9 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel;
-
-namespace Ktusaro.Core.Models
+﻿namespace Ktusaro.Core.Models
 {
     public class Event
     {
         public int? Id { get; set; }
-        public string? Title { get; set; }
+        public string? Name { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
         public string? Location { get; set; }
@@ -17,5 +14,15 @@ namespace Ktusaro.Core.Models
         public bool? Is_canceled { get; set; }
         public bool? Is_live { get; set; }
         public int? PlannedPeopleCount { get; set; }
+        public EventType EventType { get; set; }
+    }
+
+    public enum EventType
+    {
+        Vidinis = 1,
+        Masinis = 2,
+        Komercinis = 3,
+        Fakultetinis = 4,
+        Tarpastovybinis = 5
     }
 }

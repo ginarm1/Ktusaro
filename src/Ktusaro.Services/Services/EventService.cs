@@ -25,5 +25,28 @@ namespace Ktusaro.Services.Services
 
             return events;
         }
+
+        public async Task<List<Event>> GetByEventType(string eventType)
+        {
+            eventType = FirstCharToUpper(eventType);
+
+            var events = await _eventRepository.GetByEventType(eventType);
+
+            if (events == null)
+            {
+                throw new EventNotFound();
+            }
+
+            return events;
+        }
+
+        private string FirstCharToUpper(string input)
+        {
+            if (string.IsNullOrEmpty(input))
+            {
+                return string.Empty;
+            }
+            return $"{char.ToUpper(input[0])}{input[1..]}";
+        }
     }
 }

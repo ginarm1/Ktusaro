@@ -12,7 +12,7 @@ namespace Ktusaro.WebApp.Dtos
         [Required(ErrorMessage = "Event name is required")]
         [MaxLength(250)]
 
-        public string? Title { get; set; }
+        public string? Name { get; set; }
 
         [Required(ErrorMessage = "Event start date is required")]
         [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd}")]

@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Ktusaro.Repositories.SqlCommands
+﻿namespace Ktusaro.Repositories.SqlCommands
 {
     internal static class EventRepositoryCommands
     {
@@ -12,6 +6,13 @@ namespace Ktusaro.Repositories.SqlCommands
         {
             return @"SELECT *
 	                FROM public.event";
+        }
+
+        internal static string GetByEventType()
+        {
+            return @"SELECT *
+	                FROM public.event
+                    WHERE eventtype=@EventType";
         }
     }
 }
