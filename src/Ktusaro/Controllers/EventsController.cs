@@ -21,8 +21,16 @@ namespace Ktusaro.WebApp.Controllers
         [HttpGet("events")]
         public async Task<IActionResult> GetAllEvents([FromQuery] EventFilterDto eventFilterDto)
         {
-            var eventEntity = await _eventService.Filter(eventFilterDto.Id,eventFilterDto.EventType);
-            return Ok(_mapper.Map<List<CreateEventDto>>(eventEntity));
+            var eventsEntity = await _eventService.GetAll(eventFilterDto.Id,eventFilterDto.EventType);
+            return Ok(_mapper.Map<List<CreateEventDto>>(eventsEntity));
+        }
+
+        [HttpGet("events/{id}")]
+        public async Task<IActionResult> GetKudosById(int id)
+        {
+            var eventEntity = await _eventService.GetById(id);
+
+            return Ok(eventEntity);
         }
 
         //public EventsController(EventService eventService)

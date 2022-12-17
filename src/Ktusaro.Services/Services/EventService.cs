@@ -14,19 +14,7 @@ namespace Ktusaro.Services.Services
             _eventRepository = eventRepository;
         }
 
-        public async Task<List<Event>> GetAll()
-        {
-            var events = await _eventRepository.GetAll();
-
-            if (events == null)
-            {
-                throw new EventNotFound();
-            }
-
-            return events;
-        }
-
-        public async Task<List<Event>> Filter(int id, string? eventType)
+        public async Task<List<Event>> GetAll(int id, string? eventType)
         {
             var events = await _eventRepository.GetAll();
 
@@ -45,6 +33,18 @@ namespace Ktusaro.Services.Services
             }
        
             return events;
+        }
+
+        public async Task<Event> GetById(int id)
+        {
+            var kudos = await _eventRepository.GetById(id);
+
+            if (kudos == null)
+            {
+                throw new EventNotFound();
+            }
+
+            return kudos;
         }
 
         public async Task<List<Event>> GetByEventType(string eventType)

@@ -4,8 +4,8 @@ namespace Ktusaro.Core.Interfaces.Services
 {
     public interface IEventService
     {
-        Task<List<Event>> GetAll();
-        Task<List<Event>> Filter(int id, string? eventType);
-        Task<List<Event>> GetByEventType(string eventType);
+        public Task<List<Event>> GetAll(int id, string? eventType);
+        public Task<Event> GetById(int id);
+        public Task<List<Event>> GetByEventType(string eventType);
     }
 }

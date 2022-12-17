@@ -52,6 +52,10 @@ namespace Ktusaro.WebApp.Dtos
         [DisplayName("Planuojamas dalyvių kiekis")]
         public int? PlannedPeopleCount { get; set; }
 
+        [Range(0, 99999)]
+        [DisplayName("Pasirodžiusių dalyvių kiekis")]
+        public int? ShowedPeopleCount { get; set; }
+
         [DisplayName("Atvykusių dalyvių kiekis")]
         public int? PeopleCount { get; set; }
     }

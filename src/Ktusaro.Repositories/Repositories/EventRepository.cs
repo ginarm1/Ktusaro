@@ -24,6 +24,13 @@ namespace Ktusaro.Repositories.Repositories
             return entities.ToList();
         }
 
+        public async Task<Event> GetById(int id)
+        {
+            string selectQuery = EventRepositoryCommands.GetById();
+            var entity = await _connection.QuerySingleOrDefaultAsync<Event>(selectQuery, new { Id = id });
+            return entity;
+        }
+
         public async Task<List<Event>> GetByEventType(int eventTypeValue)
         {
             string selectQuery = EventRepositoryCommands.GetByEventType();

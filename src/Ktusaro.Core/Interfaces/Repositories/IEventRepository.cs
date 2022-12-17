@@ -4,7 +4,8 @@ namespace Ktusaro.Core.Interfaces.Repositories
 {
     public interface IEventRepository
     {
-        Task<List<Event>> GetAll();
-        Task<List<Event>> GetByEventType(int eventTypeValue);
+        public Task<List<Event>> GetAll();
+        public Task<Event> GetById(int id);
+        public Task<List<Event>> GetByEventType(int eventTypeValue);
     }
 }

@@ -14,6 +14,7 @@
         public bool? Is_canceled { get; set; }
         public bool? Is_live { get; set; }
         public int? PlannedPeopleCount { get; set; }
+        public int? ShowedPeopleCount { get; set; }
         public EventType EventType { get; set; }
     }
 

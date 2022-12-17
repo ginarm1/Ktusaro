@@ -8,6 +8,13 @@
 	                FROM public.event";
         }
 
+        internal static string GetById()
+        {
+            return @"SELECT *
+	                FROM public.event
+                    WHERE id=@Id";
+        }
+
         internal static string GetByEventType()
         {
             return @"SELECT *
