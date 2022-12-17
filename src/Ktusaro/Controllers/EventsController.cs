@@ -32,15 +32,5 @@ namespace Ktusaro.WebApp.Controllers
 
             return Ok(eventEntity);
         }
-
-        //public EventsController(EventService eventService)
-        //{
-        //    _eventService = eventService;
-        //}
-
-        //public IActionResult Index()
-        //{
-        //    return View();
-        //}
     }
 }
