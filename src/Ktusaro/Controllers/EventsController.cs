@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Ktusaro.WebApp.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api")]
     public class EventsController : ControllerBase
     {
         private readonly EventService _eventService;
@@ -18,21 +18,13 @@ namespace Ktusaro.WebApp.Controllers
             _mapper = mapper;
         }
 
-        /// <summary>Get all events</summary>
-        [HttpGet]
-        public async Task<IActionResult> GetAll()
+        [HttpGet("events")]
+        public async Task<IActionResult> GetAllEvents([FromQuery] EventFilterDto eventFilterDto)
         {
-            var eventEntity = await _eventService.GetAll();
-            return Ok(_mapper.Map<List<EventDto>>(eventEntity));
+            var eventEntity = await _eventService.Filter(eventFilterDto.Id,eventFilterDto.EventType);
+            return Ok(_mapper.Map<List<CreateEventDto>>(eventEntity));
         }
 
-        /// <summary>Get events list by event type</summary>
-        [HttpGet("filter")]
-        public async Task<IActionResult> GetByEventType([FromQuery] EventFilterDto eventFilterDto)
-        {
-            var eventEntity = await _eventService.GetByEventType(eventFilterDto.EventType);
-            return Ok(_mapper.Map<List<EventDto>>(eventEntity));
-        }
         //public EventsController(EventService eventService)
         //{
         //    _eventService = eventService;

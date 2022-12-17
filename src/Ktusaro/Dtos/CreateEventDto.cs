@@ -3,7 +3,7 @@ using System.ComponentModel;
 
 namespace Ktusaro.WebApp.Dtos
 {
-    public class EventDto
+    public class CreateEventDto
     {
         [Key]
         [Required]
