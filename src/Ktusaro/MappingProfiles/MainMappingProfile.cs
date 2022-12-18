@@ -15,6 +15,8 @@ namespace Ktusaro.WebApp.MappingProfiles
             CreateMap<Sponsor, SponsorResponse>().ReverseMap();
             CreateMap<CreateSponsorRequest, Sponsor>();
             CreateMap<CompanyType, string>().ConvertUsing(src => src.ToString());
+
+            CreateMap<Sponsorship, SponsorshipResponse>().ReverseMap();
         }
     }
 }

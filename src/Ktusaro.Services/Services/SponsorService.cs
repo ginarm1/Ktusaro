@@ -28,7 +28,7 @@ namespace Ktusaro.Services.Services
 
             if (sponsors == null)
             {
-                throw new ();
+                throw new SponsorNotFound();
             }
 
             return sponsors;

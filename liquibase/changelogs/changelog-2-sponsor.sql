@@ -11,4 +11,4 @@ CREATE TABLE public.sponsor (
 INSERT INTO public.sponsor
 	(name,company_type)
 VALUES 
-	('Red Bull', 1);
+	('Green Bull', 1);

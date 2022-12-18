@@ -10,6 +10,7 @@ namespace Ktusaro.WebApp
             services.AddRepositories(configuration);
             services.AddTransient<EventService>();
             services.AddTransient<SponsorService>();
+            services.AddTransient<SponsorshipService>();
         }
     }
 }

@@ -16,6 +16,7 @@ namespace Ktusaro.Repositories
 
             services.AddTransient<IEventRepository, EventRepository>();
             services.AddTransient<ISponsorRepository, SponsorRepository>();
+            services.AddTransient<ISponsorshipRepository, SponsorshipRepository>();
         }
     }
 }
