@@ -21,7 +21,7 @@ namespace Ktusaro.WebApp.Controllers
         }
 
         [HttpPost("sponsors")]
-        public async Task<IActionResult> CreateEvent(CreateSponsorRequest request)
+        public async Task<IActionResult> CreateSponsor(CreateSponsorRequest request)
         {
             var sponsor = _mapper.Map<Sponsor>(request);
 
@@ -30,7 +30,11 @@ namespace Ktusaro.WebApp.Controllers
 
             return CreatedAtAction(nameof(GetSponsorsById), new { id = insertedSponsorResponse.Id }, insertedSponsorResponse);
         }
-
+        
+        /// <summary>
+        /// Get sponsors
+        /// </summary>
+        /// <returns></returns>
         [HttpGet("sponsors")]
         public async Task<IActionResult> GetAllSponsors()
         {

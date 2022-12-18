@@ -17,7 +17,7 @@ namespace Ktusaro.Repositories.Repositories
 
         public async Task<int> Create(Sponsor sponsor)
         {
-            string insertQuery = SponsorsRepositoryCommands.Create();
+            string insertQuery = SponsorRepositoryCommands.Create();
 
             var insertedSponsorId = await _connection.ExecuteScalarAsync<int>(insertQuery, sponsor);
 
@@ -26,7 +26,7 @@ namespace Ktusaro.Repositories.Repositories
 
         public async Task<List<Sponsor>> GetAll()
         {
-            string selectQuery = SponsorsRepositoryCommands.GetAll();
+            string selectQuery = SponsorRepositoryCommands.GetAll();
 
             var sponsors = await _connection.QueryAsync<Sponsor>(selectQuery);
             return sponsors.ToList();
@@ -34,14 +34,14 @@ namespace Ktusaro.Repositories.Repositories
 
         public async Task<Sponsor> GetById(int id)
         {
-            string selectQuery = SponsorsRepositoryCommands.GetById();
+            string selectQuery = SponsorRepositoryCommands.GetById();
             var sponsor = await _connection.QuerySingleOrDefaultAsync<Sponsor>(selectQuery, new { Id = id });
             return sponsor;
         }
 
         public async Task<int> Update(int id, Sponsor sponsor)
         {
-            string updateQuery = SponsorsRepositoryCommands.Update();
+            string updateQuery = SponsorRepositoryCommands.Update();
 
             var updatedSponsorId = await _connection.ExecuteScalarAsync<int>(updateQuery,
                 new
@@ -56,7 +56,7 @@ namespace Ktusaro.Repositories.Repositories
 
         public async Task<int> Delete(int id)
         {
-            string deleteQuery = SponsorsRepositoryCommands.Delete();
+            string deleteQuery = SponsorRepositoryCommands.Delete();
 
             var deletedSponsorId = await _connection.ExecuteScalarAsync<int>(deleteQuery, new { Id = id });
 

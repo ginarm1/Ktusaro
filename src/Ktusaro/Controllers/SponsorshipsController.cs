@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Ktusaro.Core.Interfaces.Services;
+using Ktusaro.Core.Models;
 using Ktusaro.Services.Services;
 using Ktusaro.WebApp.Dtos;
 using Microsoft.AspNetCore.Mvc;
@@ -19,11 +19,30 @@ namespace Ktusaro.WebApp.Controllers
             _mapper = mapper;
         }
 
+        [HttpPost("sponsorships")]
+        public async Task<IActionResult> CreateSponsorShip(CreateSponsorshipRequest request)
+        {
+            var sponsorship = _mapper.Map<Sponsorship>(request);
+
+            var insertedSponsorship = await _sponsorshipService.Create(sponsorship);
+            var insertedSponsorResponse = _mapper.Map<SponsorshipResponse>(insertedSponsorship);
+
+            return CreatedAtAction(nameof(GetSponsorshipById), new { id = insertedSponsorResponse.Id }, insertedSponsorResponse);
+        }
+
         [HttpGet("sponsorships")]
         public async Task<IActionResult> GetAllSponsorships()
         {
             var sponsorships = await _sponsorshipService.GetAll();
             return Ok(_mapper.Map<List<SponsorshipResponse>>(sponsorships));
+        }
+
+        [HttpGet("sponsorships/{id}")]
+        public async Task<IActionResult> GetSponsorshipById(int id)
+        {
+            var sponsorship = await _sponsorshipService.GetById(id);
+
+            return Ok(sponsorship);
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace Ktusaro.Repositories.SqlCommands
 {
-    internal class SponsorsRepositoryCommands
+    internal class SponsorRepositoryCommands
     {
         internal static string Create()
         {

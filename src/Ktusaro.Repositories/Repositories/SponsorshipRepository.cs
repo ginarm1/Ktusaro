@@ -22,5 +22,37 @@ namespace Ktusaro.Repositories.Repositories
             var sponsorships = await _connection.QueryAsync<Sponsorship>(selectQuery);
             return sponsorships.ToList();
         }
+
+        public async Task<Sponsorship> GetById(int id)
+        {
+            string selectQuery = SponsorshipRepositoryCommands.GetById();
+            var sponsorship = await _connection.QuerySingleOrDefaultAsync<Sponsorship>(selectQuery, new { Id = id });
+            return sponsorship;
+        }
+
+        public async Task<int> Create(Sponsorship sponsorship)
+        {
+            string insertQuery = SponsorshipRepositoryCommands.Create();
+
+            var insertedSponsorshipId = await _connection.ExecuteScalarAsync<int>(insertQuery, sponsorship);
+
+            return insertedSponsorshipId;
+        }
+
+        public async Task<int> Update(int id, Sponsorship sponsorship)
+        {
+            string updateQuery = SponsorshipRepositoryCommands.Update();
+
+            var updatedSponsorshipId = await _connection.ExecuteScalarAsync<int>(updateQuery,
+                new
+                {
+                    Id = id,
+                    sponsorship.Description,
+                    sponsorship.Quantity,
+                    sponsorship.Cost
+                });
+
+            return updatedSponsorshipId;
+        }
     }
 }
