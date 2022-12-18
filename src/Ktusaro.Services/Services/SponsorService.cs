@@ -14,6 +14,14 @@ namespace Ktusaro.Services.Services
             _sponsorRepository = sponsorRepository;
         }
 
+        public async Task<Sponsor> Create(Sponsor sponsor)
+        {
+            var insertedSponsorId = await _sponsorRepository.Create(sponsor);
+            var insertedSponsor = await _sponsorRepository.GetById(insertedSponsorId);
+
+            return insertedSponsor;
+        }
+
         public async Task<List<Sponsor>> GetAll()
         {
             var sponsors = await _sponsorRepository.GetAll();

@@ -5,10 +5,6 @@ namespace Ktusaro.WebApp.Dtos
 {
     public class CreateSponsorRequest
     {
-        [Key]
-        [Required]
-        public int? Id { get; set; }
-
         [Required(ErrorMessage = "Sponsor name is required")]
         [MaxLength(250)]
 

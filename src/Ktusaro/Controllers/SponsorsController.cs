@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Ktusaro.Core.Interfaces.Services;
+using Ktusaro.Core.Models;
 using Ktusaro.Services.Services;
 using Ktusaro.WebApp.Dtos;
 using Microsoft.AspNetCore.Mvc;
@@ -17,6 +18,17 @@ namespace Ktusaro.WebApp.Controllers
         {
             _sponsorService = sponsorService;
             _mapper = mapper;
+        }
+
+        [HttpPost("sponsors")]
+        public async Task<IActionResult> CreateEvent(CreateSponsorRequest request)
+        {
+            var sponsor = _mapper.Map<Sponsor>(request);
+
+            var insertedSponsor = await _sponsorService.Create(sponsor);
+            var insertedSponsorResponse = _mapper.Map<SponsorResponse>(insertedSponsor);
+
+            return CreatedAtAction(nameof(GetSponsorsById), new { id = insertedSponsorResponse.Id }, insertedSponsorResponse);
         }
 
         [HttpGet("sponsors")]

@@ -15,6 +15,15 @@ namespace Ktusaro.Repositories.Repositories
             _connection = connection;
         }
 
+        public async Task<int> Create(Sponsor sponsor)
+        {
+            string insertQuery = SponsorsRepositoryCommands.Create();
+
+            var insertedSponsorId = await _connection.ExecuteScalarAsync<int>(insertQuery, sponsor);
+
+            return insertedSponsorId;
+        }
+
         public async Task<List<Sponsor>> GetAll()
         {
             string selectQuery = SponsorsRepositoryCommands.GetAll();

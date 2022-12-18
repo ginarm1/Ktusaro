@@ -327,10 +327,9 @@ namespace Ktusaro.UnitTests
         }
 
         [Test]
-        public async Task Delete_ValidEventId_DeletesEvent()
+        [TestCase(2)]
+        public async Task Delete_ValidEventId_DeletesEvent(int eventId)
         {
-            int eventId = 2;
-
             _eventRepositoryMock.Setup(x => x.GetById(eventId)).ReturnsAsync(new Event
             {
                 Id = eventId
