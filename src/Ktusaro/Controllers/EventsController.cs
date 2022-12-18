@@ -44,5 +44,17 @@ namespace Ktusaro.WebApp.Controllers
 
             return eventEntity;
         }
+
+        [HttpPut("events/{id}")]
+        public async Task<IActionResult> Update(int id,CreateEventRequest request)
+        {
+
+            var @event = _mapper.Map<Event>(request);
+
+            var updatedEvent = await _eventService.Update(id,@event);
+            var updatedEventResponse = _mapper.Map<EventResponse>(updatedEvent);
+
+            return CreatedAtAction(nameof(GetEventById), new { id = updatedEventResponse.Id }, updatedEventResponse);
+        }
     }
 }

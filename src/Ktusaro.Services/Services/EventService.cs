@@ -91,6 +91,19 @@ namespace Ktusaro.Services.Services
             return events;
         }
 
+        public async Task<Event> Update(int id,Event @event)
+        {
+            if (await _eventRepository.GetById(id) == null)
+            {
+                throw new EventNotFound();
+            }
+
+            var updatedEventId = await _eventRepository.Update(id,@event);
+            var updatedEvent = await _eventRepository.GetById(updatedEventId);
+
+            return updatedEvent;
+        }
+
         private string FirstCharToUpper(string input)
         {
             if (string.IsNullOrEmpty(input))

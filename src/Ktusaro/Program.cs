@@ -1,5 +1,6 @@
 using Ktusaro.WebApp;
 using Ktusaro.WebApp.MappingProfiles;
+using Ktusaro.WebApp.Middleware;
 using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -29,6 +30,7 @@ app.UseSwaggerUI(c =>
     c.SwaggerEndpoint("v1/swagger.json", "Ktusaro");
 });
 app.UseHttpsRedirection();
+app.UseMiddleware<ExceptionHandlingMiddleware>();
 app.UseStaticFiles();
 
 app.UseRouting();

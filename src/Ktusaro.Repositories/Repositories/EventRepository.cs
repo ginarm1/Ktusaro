@@ -47,5 +47,28 @@ namespace Ktusaro.Repositories.Repositories
             return entities.ToList();
         }
 
+        public async Task<int> Update(int id,Event @event)
+        {
+            string updateQuery = EventRepositoryCommands.Update();
+
+            var updatedEventId = await _connection.ExecuteScalarAsync<int>(updateQuery,
+                new 
+                {   Id = id,
+                    @event.Name,
+                    @event.StartDate,
+                    @event.EndDate,
+                    @event.Location,
+                    @event.Description,
+                    @event.CoordinatorName,
+                    @event.CoordinatorSurname,
+                    @event.IsCanceled,
+                    @event.IsLive,
+                    @event.PlannedPeopleCount,
+                    @event.ShowedPeopleCount,
+                    @event.EventType
+                });
+
+            return updatedEventId;
+        }
     }
 }

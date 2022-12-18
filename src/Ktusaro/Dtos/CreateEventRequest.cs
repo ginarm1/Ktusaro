@@ -28,9 +28,6 @@ namespace Ktusaro.WebApp.Dtos
         public string? Description { get; set; }
 
         [Required]
-        public bool HasCoordinator { get; set; }
-
-        [Required]
         [MaxLength(100)]
         public string? CoordinatorName { get; set; }
 
