@@ -70,5 +70,14 @@ namespace Ktusaro.Repositories.Repositories
 
             return updatedEventId;
         }
+
+        public async Task<int> Delete(int id)
+        {
+            string deleteQuery = EventRepositoryCommands.Delete();
+
+            var deletedEventId = await _connection.ExecuteScalarAsync<int>(deleteQuery, new { Id = id });
+
+            return deletedEventId;
+        }
     }
 }

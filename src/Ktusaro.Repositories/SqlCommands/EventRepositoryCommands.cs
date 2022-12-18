@@ -44,5 +44,13 @@
 	                FROM public.event
                     WHERE event_type=@EventType";
         }
+
+        internal static string Delete()
+        {
+            return @"DELETE
+	                FROM public.event
+                    WHERE id=@Id
+                    RETURNING id";
+        }
     }
 }

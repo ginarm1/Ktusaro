@@ -12,10 +12,9 @@ namespace Ktusaro.WebApp.MappingProfiles
             CreateMap<CreateEventRequest, Event>();
             CreateMap<EventType, string>().ConvertUsing(src => src.ToString());
 
-            CreateMap<Sponsor, SponsorResponse>();
+            CreateMap<Sponsor, SponsorResponse>().ReverseMap();
             CreateMap<CreateSponsorRequest, Sponsor>();
             CreateMap<CompanyType, string>().ConvertUsing(src => src.ToString());
-
         }
     }
 }

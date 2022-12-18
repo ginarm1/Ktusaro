@@ -20,7 +20,7 @@ namespace Ktusaro.WebApp.Controllers
         }
 
         [HttpPost("events")]
-        public async Task<IActionResult> CreateKudos(CreateEventRequest request)
+        public async Task<IActionResult> CreateEvent(CreateEventRequest request)
         {
             var @event = _mapper.Map<Event>(request);
 
@@ -37,7 +37,6 @@ namespace Ktusaro.WebApp.Controllers
             return Ok(_mapper.Map<List<EventResponse>>(eventsEntity));
         }
 
-        //[HttpGet("events/{id}")]
         private async Task<EventResponse> GetEventById(int id)
         {
             var eventEntity = _mapper.Map <EventResponse>(await _eventService.GetById(id));
@@ -52,9 +51,16 @@ namespace Ktusaro.WebApp.Controllers
             var @event = _mapper.Map<Event>(request);
 
             var updatedEvent = await _eventService.Update(id,@event);
-            var updatedEventResponse = _mapper.Map<EventResponse>(updatedEvent);
 
-            return CreatedAtAction(nameof(GetEventById), new { id = updatedEventResponse.Id }, updatedEventResponse);
+            return Ok(_mapper.Map<EventResponse>(updatedEvent));
+        }
+
+        [HttpDelete("events/{id}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var deletedEventId = await _eventService.Delete(id);
+
+            return Ok(deletedEventId);
         }
     }
 }

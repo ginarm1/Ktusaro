@@ -8,6 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoFixture.NUnit3" Version="4.17.0" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.11.0" />
     <PackageReference Include="Moq" Version="4.18.3" />
     <PackageReference Include="NUnit" Version="3.13.2" />
@@ -18,6 +19,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\src\Ktusaro.Core\Ktusaro.Core.csproj" />
     <ProjectReference Include="..\..\src\Ktusaro.Services\Ktusaro.Services.csproj" />
+    <ProjectReference Include="..\..\src\Ktusaro\Ktusaro.WebApp.csproj" />
   </ItemGroup>
 
 </Project>

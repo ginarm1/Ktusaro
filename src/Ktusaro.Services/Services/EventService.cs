@@ -104,6 +104,18 @@ namespace Ktusaro.Services.Services
             return updatedEvent;
         }
 
+        public async Task<int> Delete(int id)
+        {
+            if (await _eventRepository.GetById(id) == null)
+            {
+                throw new EventNotFound();
+            }
+
+            var deletedEventId = await _eventRepository.Delete(id);
+
+            return deletedEventId;
+        }
+
         private string FirstCharToUpper(string input)
         {
             if (string.IsNullOrEmpty(input))
