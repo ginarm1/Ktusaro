@@ -45,5 +45,15 @@ namespace Ktusaro.WebApp.Controllers
 
             return Ok(sponsor);
         }
+
+        [HttpPut("sponsors/{id}")]
+        public async Task<IActionResult> Update(int id, CreateSponsorRequest request)
+        {
+            var sponsor = _mapper.Map<Sponsor>(request);
+
+            var updatedSponsor = await _sponsorService.Update(id, sponsor);
+
+            return Ok(_mapper.Map<SponsorResponse>(updatedSponsor));
+        }
     }
 }

@@ -65,6 +65,57 @@ namespace Ktusaro.UnitTests
         }
 
         [Test]
+        [TestCase(2)]
+        public async Task Update_ValidEventData_UpdatesEvent(int sponsorId)
+        {
+            var allSponsors = new List<Sponsor>
+            {
+                new Sponsor
+                {
+                    Id = 1,
+                    Name = "Red Bull",
+                    CompanyType = CompanyType.UAB
+                },
+                new Sponsor
+                {
+                    Id = 2,
+                    Name = "Vilniaus grūdai",
+                    CompanyType = CompanyType.AB
+                },
+            };
+
+            var newSponsor = new Sponsor
+            {
+                Id = 2,
+                Name = "Saulės pasaulis",
+                CompanyType = CompanyType.UAB
+            };
+
+            _sponsorRepositoryMock.Setup(x => x.Update(sponsorId, newSponsor)).ReturnsAsync(sponsorId);
+            _sponsorRepositoryMock.Setup(x => x.GetById(sponsorId)).ReturnsAsync(new Sponsor
+            {
+                Id = sponsorId
+            });
+
+            var result = await _sponsorService.Update(sponsorId, newSponsor);
+
+            _sponsorRepositoryMock.Verify(x => x.Update(sponsorId, It.IsAny<Sponsor>()), Times.Once);
+            _sponsorRepositoryMock.Verify(x => x.GetById(sponsorId), Times.AtLeastOnce);
+            Assert.That(result.Id, Is.EqualTo(sponsorId));
+        }
+
+        [Test,AutoData]
+        public void Update_SponsorIdNotFound_ThrowsException(Sponsor sponsor)
+        {
+            _sponsorRepositoryMock.Setup(x => x.GetById(It.IsAny<int>())).ReturnsAsync(value: null);
+
+            Assert.That(async () => await _sponsorService.Update(It.IsAny<int>(), sponsor),
+                Throws.Exception.TypeOf<SponsorNotFound>());
+
+            _sponsorRepositoryMock.Verify(x => x.Update(It.IsAny<int>(), sponsor), Times.Never);
+        }
+
+        [Test]
         public void GetById_SponsorIdNotFound_ThrowsException()
         {
             _sponsorRepositoryMock.Setup(x => x.GetById(It.IsAny<int>())).ReturnsAsync(value: null);

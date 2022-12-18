@@ -38,5 +38,20 @@ namespace Ktusaro.Repositories.Repositories
             var sponsor = await _connection.QuerySingleOrDefaultAsync<Sponsor>(selectQuery, new { Id = id });
             return sponsor;
         }
+
+        public async Task<int> Update(int id, Sponsor sponsor)
+        {
+            string updateQuery = SponsorsRepositoryCommands.Update();
+
+            var updatedSponsorId = await _connection.ExecuteScalarAsync<int>(updateQuery,
+                new
+                {
+                    Id = id,
+                    sponsor.Name,
+                    sponsor.CompanyType
+                });
+
+            return updatedSponsorId;
+        }
     }
 }

@@ -45,5 +45,18 @@ namespace Ktusaro.Services.Services
 
             return sponsor;
         }
+
+        public async Task<Sponsor> Update(int id, Sponsor sponsor)
+        {
+            if (await _sponsorRepository.GetById(id) == null)
+            {
+                throw new SponsorNotFound();
+            }
+
+            var updatedSponsorId = await _sponsorRepository.Update(id, sponsor);
+            var updatedSponsor = await _sponsorRepository.GetById(updatedSponsorId);
+
+            return updatedSponsor;
+        }
     }
 }

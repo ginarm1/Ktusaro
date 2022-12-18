@@ -45,7 +45,7 @@ namespace Ktusaro.WebApp.Controllers
         }
 
         [HttpPut("events/{id}")]
-        public async Task<IActionResult> Update(int id,CreateSponsorRequest request)
+        public async Task<IActionResult> Update(int id,CreateEventRequest request)
         {
 
             var @event = _mapper.Map<Event>(request);

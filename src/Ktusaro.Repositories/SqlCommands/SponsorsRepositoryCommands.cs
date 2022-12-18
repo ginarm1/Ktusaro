@@ -21,5 +21,13 @@
 	                FROM public.sponsor
                     WHERE id=@Id";
         }
+
+        internal static string Update()
+        {
+            return @"UPDATE public.sponsor 
+	                 SET name=@Name,company_type=@CompanyType
+                     WHERE id=@Id
+                     RETURNING id";
+        }
     }
 }
