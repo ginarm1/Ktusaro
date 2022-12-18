@@ -3,12 +3,12 @@
 CREATE TABLE public.sponsor (
 	id serial PRIMARY KEY NOT NULL,
 	name varchar(250) NOT NULL,
-	companyType int NOT NULL
+	company_type int NOT NULL
 );
 
 --changeset user:2
 --comment: Populated sponsor table
 INSERT INTO public.sponsor
-	(name,companyType)
+	(name,company_type)
 VALUES 
 	('Red Bull', 1);

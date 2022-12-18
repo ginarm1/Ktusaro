@@ -1,14 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel;
+using Ktusaro.Core.Models;
 
 namespace Ktusaro.WebApp.Dtos
 {
     public class CreateEventRequest
     {
-        [Key]
-        [Required]
-        public int? Id { get; set; }
-
         [Required(ErrorMessage = "Event name is required")]
         [MaxLength(250)]
 
@@ -31,7 +28,7 @@ namespace Ktusaro.WebApp.Dtos
         public string? Description { get; set; }
 
         [Required]
-        public bool Has_coordinator { get; set; }
+        public bool HasCoordinator { get; set; }
 
         [Required]
         [MaxLength(100)]
@@ -42,10 +39,10 @@ namespace Ktusaro.WebApp.Dtos
         public string? CoordinatorSurname { get; set; }
 
         [Required]
-        public bool Is_canceled { get; set; }
+        public bool IsCanceled { get; set; }
 
         [Required]
-        public bool Is_live { get; set; }
+        public bool IsLive { get; set; }
 
         [Required]
         [Range(0, 99999)]
@@ -56,10 +53,7 @@ namespace Ktusaro.WebApp.Dtos
         [DisplayName("Pasirodžiusių dalyvių kiekis")]
         public int? ShowedPeopleCount { get; set; }
 
-        [DisplayName("Atvykusių dalyvių kiekis")]
-        public int? PeopleCount { get; set; }
-
         [Required]
-        public int? EventType { get; set; }
+        public EventType EventType { get; set; }
     }
 }

@@ -16,6 +16,15 @@ namespace Ktusaro.Repositories.Repositories
             _connection = connection;
         }
 
+        public async Task<int> Create(Event @event)
+        {
+            string insertQuery = EventRepositoryCommands.Create();
+
+            var insertedEventId = await _connection.ExecuteScalarAsync<int>(insertQuery, @event);
+
+            return insertedEventId;
+        }
+
         public async Task<List<Event>> GetAll()
         {
             string selectQuery = EventRepositoryCommands.GetAll();
@@ -37,5 +46,6 @@ namespace Ktusaro.Repositories.Repositories
             var entities = await _connection.QueryAsync<Event>(selectQuery, new { EventType = eventTypeValue });
             return entities.ToList();
         }
+
     }
 }

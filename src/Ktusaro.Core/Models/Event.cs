@@ -8,11 +8,11 @@
         public DateTime EndDate { get; set; }
         public string? Location { get; set; }
         public string? Description { get; set; }
-        public bool? Has_coordinator { get; set; }
+        public bool? HasCoordinator { get; set; }
         public string? CoordinatorName { get; set; }
         public string? CoordinatorSurname { get; set; }
-        public bool? Is_canceled { get; set; }
-        public bool? Is_live { get; set; }
+        public bool? IsCanceled { get; set; }
+        public bool? IsLive { get; set; }
         public int? PlannedPeopleCount { get; set; }
         public int? ShowedPeopleCount { get; set; }
         public EventType EventType { get; set; }

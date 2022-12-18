@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Ktusaro.Core.Models;
 using Ktusaro.Services.Services;
 using Ktusaro.WebApp.Dtos;
 using Microsoft.AspNetCore.Mvc;
@@ -18,6 +19,17 @@ namespace Ktusaro.WebApp.Controllers
             _mapper = mapper;
         }
 
+        [HttpPost("events")]
+        public async Task<IActionResult> CreateKudos(CreateEventRequest request)
+        {
+            var @event = _mapper.Map<Event>(request);
+
+            var insertedEvent = await _eventService.Create(@event);
+            var insertedEventResponse = _mapper.Map<EventResponse>(insertedEvent);
+
+            return CreatedAtAction(nameof(GetEventById), new { id = insertedEventResponse.Id }, insertedEventResponse);
+        }
+
         [HttpGet("events")]
         public async Task<IActionResult> GetAllEvents([FromQuery] EventFilterQuery eventFilterDto)
         {
@@ -25,12 +37,12 @@ namespace Ktusaro.WebApp.Controllers
             return Ok(_mapper.Map<List<EventResponse>>(eventsEntity));
         }
 
-        [HttpGet("events/{id}")]
-        public async Task<IActionResult> GetEventsById(int id)
+        //[HttpGet("events/{id}")]
+        private async Task<EventResponse> GetEventById(int id)
         {
-            var eventEntity = await _eventService.GetById(id);
+            var eventEntity = _mapper.Map <EventResponse>(await _eventService.GetById(id));
 
-            return Ok(eventEntity);
+            return eventEntity;
         }
     }
 }

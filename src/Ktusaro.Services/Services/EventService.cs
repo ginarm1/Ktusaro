@@ -14,6 +14,14 @@ namespace Ktusaro.Services.Services
             _eventRepository = eventRepository;
         }
 
+        public async Task<Event> Create(Event @event)
+        {
+            var insertedEventId = await _eventRepository.Create(@event);
+            var insertedEvent = await _eventRepository.GetById(insertedEventId);
+
+            return insertedEvent;
+        }
+
         public async Task<List<Event>> GetAll(int id, string? eventType)
         {
             var events = await _eventRepository.GetAll();
