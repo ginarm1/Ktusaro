@@ -123,5 +123,31 @@ namespace Ktusaro.UnitTests
             Assert.That(async () => await _sponsorService.GetById(It.IsAny<int>()),
                 Throws.Exception.TypeOf<SponsorNotFound>());
         }
+
+        [Test]
+        [TestCase(2)]
+        public async Task Delete_ValidSponsorId_DeletesSponsor(int sponsorId)
+        {
+            _sponsorRepositoryMock.Setup(x => x.GetById(sponsorId)).ReturnsAsync(new Sponsor
+            {
+                Id = sponsorId
+            });
+
+            var result = await _sponsorService.Delete(sponsorId);
+
+            _sponsorRepositoryMock.Verify(x => x.Delete(sponsorId), Times.Once);
+            _sponsorRepositoryMock.Verify(x => x.GetById(sponsorId), Times.Once);
+        }
+
+        [Test]
+        public void Delete_SponsorIdNotFound_ThrowsException()
+        {
+            _sponsorRepositoryMock.Setup(x => x.GetById(It.IsAny<int>())).ReturnsAsync(value: null);
+
+            Assert.That(async () => await _sponsorService.Delete(It.IsAny<int>()),
+                Throws.Exception.TypeOf<SponsorNotFound>());
+
+            _sponsorRepositoryMock.Verify(x => x.Delete(It.IsAny<int>()), Times.Never);
+        }
     }
 }

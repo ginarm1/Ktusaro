@@ -8,5 +8,6 @@ namespace Ktusaro.Core.Interfaces.Services
         public Task<List<Sponsor>> GetAll();
         public Task<Sponsor> GetById(int id);
         public Task<Sponsor> Update(int id, Sponsor sponsor);
+        public Task<int> Delete(int id);
     }
 }

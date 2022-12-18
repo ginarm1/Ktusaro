@@ -55,5 +55,13 @@ namespace Ktusaro.WebApp.Controllers
 
             return Ok(_mapper.Map<SponsorResponse>(updatedSponsor));
         }
+
+        [HttpDelete("sponsors/{id}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var deletedSponsorId = await _sponsorService.Delete(id);
+
+            return Ok(deletedSponsorId);
+        }
     }
 }

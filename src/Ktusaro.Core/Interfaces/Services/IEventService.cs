@@ -9,5 +9,6 @@ namespace Ktusaro.Core.Interfaces.Services
         public Task<Event> GetById(int id);
         public Task<List<Event>> GetByEventType(string eventType);
         public Task<Event> Update(int id, Event @event);
+        public Task<int> Delete(int id);
     }
 }
