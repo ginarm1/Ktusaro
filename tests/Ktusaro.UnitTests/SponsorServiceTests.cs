@@ -15,6 +15,7 @@ namespace Ktusaro.UnitTests
     {
         private Mock<ISponsorRepository> _sponsorRepositoryMock;
         private SponsorService _sponsorService;
+
         [SetUp]
         public void Setup()
         {

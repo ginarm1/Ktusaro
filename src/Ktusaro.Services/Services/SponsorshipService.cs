@@ -18,13 +18,32 @@ namespace Ktusaro.Services.Services
             _eventRepository = eventRepository;
         }
 
-        public async Task<List<Sponsorship>> GetAll()
+        public async Task<List<Sponsorship>> GetAll(int sponsorId, int eventId)
         {
             var sponsorships = await _sponsorshipRepository.GetAll();
 
-            if (sponsorships == null)
+            if (sponsorId != 0)
             {
-                throw new SponsorshipNotFound();
+                var sponsor = await _sponsorRepository.GetById((int) sponsorId);
+
+                if (sponsor == null)
+                {
+                    throw new SponsorNotFound();
+                }
+
+                sponsorships = sponsorships.Where(s => s.SponsorId == sponsorId).ToList();
+            }
+
+            if (eventId != 0)
+            {
+                var @event = await _eventRepository.GetById((int)eventId);
+
+                if (@event == null)
+                {
+                    throw new EventNotFound();
+                }
+
+                sponsorships = sponsorships.Where(s => s.EventId == eventId).ToList();
             }
 
             return sponsorships;

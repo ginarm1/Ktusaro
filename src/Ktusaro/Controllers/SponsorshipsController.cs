@@ -31,9 +31,9 @@ namespace Ktusaro.WebApp.Controllers
         }
 
         [HttpGet("sponsorships")]
-        public async Task<IActionResult> GetAllSponsorships()
+        public async Task<IActionResult> GetAllSponsorships([FromQuery] SponsorshipFilterParameters parameters)
         {
-            var sponsorships = await _sponsorshipService.GetAll();
+            var sponsorships = await _sponsorshipService.GetAll(parameters.SponsorId,parameters.EventId);
             return Ok(_mapper.Map<List<SponsorshipResponse>>(sponsorships));
         }
 

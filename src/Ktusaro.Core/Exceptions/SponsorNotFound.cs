@@ -2,7 +2,7 @@
 {
     public class SponsorNotFound : EntityNotFoundException
     {
-        public SponsorNotFound() : base("notFound","Sponsor not found")
+        public SponsorNotFound() : base("notFound","Sponsor was not found")
         { 
         }
     }

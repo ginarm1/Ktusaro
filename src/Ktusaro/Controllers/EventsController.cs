@@ -31,9 +31,9 @@ namespace Ktusaro.WebApp.Controllers
         }
 
         [HttpGet("events")]
-        public async Task<IActionResult> GetAllEvents([FromQuery] EventFilterQuery eventFilterDto)
+        public async Task<IActionResult> GetAllEvents([FromQuery] EventFilterParameters parameters)
         {
-            var eventsEntity = await _eventService.GetAll(eventFilterDto.Id,eventFilterDto.EventType);
+            var eventsEntity = await _eventService.GetAll(parameters.Id,parameters.EventType);
             return Ok(_mapper.Map<List<EventResponse>>(eventsEntity));
         }
 
