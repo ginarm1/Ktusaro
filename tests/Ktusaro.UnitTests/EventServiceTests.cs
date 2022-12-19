@@ -15,18 +15,12 @@ namespace Ktusaro.UnitTests
     public class EventServiceTests
     {
         private Mock<IEventRepository> _eventRepositoryMock;
-        private Mock<ISponsorRepository> _sponsorRepositoryMock;
-        private Mock<ISponsorshipRepository> _sponsorshipRepositoryMock;
         private EventService _eventService;
-        private SponsorshipService _sponsorshipService;
         [SetUp]
         public void Setup()
         {
             _eventRepositoryMock= new Mock<IEventRepository>();
-            _sponsorRepositoryMock = new Mock<ISponsorRepository>();
-            _sponsorshipRepositoryMock = new Mock<ISponsorshipRepository>();
             _eventService = new EventService(_eventRepositoryMock.Object);
-            _sponsorshipService = new SponsorshipService(_sponsorshipRepositoryMock.Object,_sponsorRepositoryMock.Object,_eventRepositoryMock.Object);
         }
 
         [Test, AutoData]
