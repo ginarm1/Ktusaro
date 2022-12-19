@@ -95,5 +95,17 @@ namespace Ktusaro.Services.Services
 
             return updatedSponsorship;
         }
+
+        public async Task<int> Delete(int id)
+        {
+            if (await _sponsorshipRepository.GetById(id) == null)
+            {
+                throw new SponsorshipNotFound();
+            }
+
+            var deletedSponsorshipId = await _sponsorshipRepository.Delete(id);
+
+            return deletedSponsorshipId;
+        }
     }
 }

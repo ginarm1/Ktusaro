@@ -8,5 +8,6 @@ namespace Ktusaro.Core.Interfaces.Services
         public Task<Sponsorship> GetById(int id);
         public Task<Sponsorship> Create(Sponsorship sponsorship);
         public Task<Sponsorship> Update(int id, Sponsorship sponsorship);
+        public Task<int> Delete(int id);
     }
 }

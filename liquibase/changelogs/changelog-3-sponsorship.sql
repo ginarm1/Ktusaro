@@ -14,14 +14,16 @@ CREATE TABLE public.sponsorship (
 ALTER TABLE public.sponsorship
     ADD CONSTRAINT fk_sponsor
         FOREIGN KEY(sponsor_id) 
-            REFERENCES "sponsor" (id);
+            REFERENCES "sponsor" (id)
+                ON DELETE CASCADE;
 
 --changeset user:3
 --comment: Sponsorship table realation with event table
 ALTER TABLE public.sponsorship
     ADD CONSTRAINT fk_event
         FOREIGN KEY(event_id) 
-            REFERENCES "event" (id);
+            REFERENCES "event" (id)
+                ON DELETE CASCADE;
 
 --changeset user:4
 --comment: Populated sponsorship table

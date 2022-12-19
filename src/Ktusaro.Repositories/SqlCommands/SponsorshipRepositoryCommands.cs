@@ -29,5 +29,13 @@
                      WHERE id=@Id
                      RETURNING id";
         }
+
+        internal static string Delete()
+        {
+            return @"DELETE
+	                FROM public.sponsorship
+                    WHERE id=@Id
+                    RETURNING id";
+        }
     }
 }

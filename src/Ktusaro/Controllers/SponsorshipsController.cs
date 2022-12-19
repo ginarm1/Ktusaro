@@ -44,5 +44,23 @@ namespace Ktusaro.WebApp.Controllers
 
             return Ok(sponsorship);
         }
+
+        [HttpPut("sponsorships/{id}")]
+        public async Task<IActionResult> Update(int id, CreateSponsorshipRequest request)
+        {
+            var sponsorship = _mapper.Map<Sponsorship>(request);
+
+            var updatedSponsorship = await _sponsorshipService.Update(id, sponsorship);
+
+            return Ok(_mapper.Map<SponsorshipResponse>(updatedSponsorship));
+        }
+
+        [HttpDelete("sponsorships/{id}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var deletedSponsorshipId = await _sponsorshipService.Delete(id);
+
+            return Ok(deletedSponsorshipId);
+        }
     }
 }

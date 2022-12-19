@@ -1,13 +1,11 @@
 ﻿using AutoFixture.NUnit3;
 using Ktusaro.Core.Exceptions;
 using Ktusaro.Core.Interfaces.Repositories;
-using Ktusaro.Core.Interfaces.Services;
 using Ktusaro.Core.Models;
 using Ktusaro.Services.Services;
 using Moq;
 using NUnit.Framework;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Ktusaro.UnitTests
@@ -171,6 +169,102 @@ namespace Ktusaro.UnitTests
             var result = await _sponsorshipService.GetAll(0, 2);
 
             Assert.That(result, Has.Count.EqualTo(validResultSponsorshipsCount));
+        }
+
+        [Test]
+        [TestCase(2)]
+        public async Task Update_ValidSponsorshipData_UpdatesSponsorship(int sponsorshipId)
+        {
+            var allSponsorships = new List<Sponsorship>
+            {
+                new Sponsorship
+                {
+                    Id = 1,
+                    Description = "Dvi dėžės",
+                    Quantity = 2,
+                    Cost = 10.99m,
+                    SponsorId = 1,
+                    EventId = 2
+                },
+                new Sponsorship
+                {
+                    Id = 2,
+                    Description = "Keturios paletės po tris dėžes",
+                    Quantity = 4,
+                    Cost = 20.99m,
+                    SponsorId = 2,
+                    EventId = 2
+                },
+
+            };
+
+            var newSponsorship = new Sponsorship
+            {
+                Id = 2,
+                Description = "Šešios paletės po tris dėžes",
+                Quantity = 6,
+                Cost = 50.99m,
+                SponsorId = 2,
+                EventId = 2
+            };
+
+            _sponsorshipRepositoryMock.Setup(x => x.Update(sponsorshipId, newSponsorship)).ReturnsAsync(sponsorshipId);
+            _sponsorshipRepositoryMock.Setup(x => x.GetById(sponsorshipId)).ReturnsAsync(new Sponsorship
+            {
+                Id = sponsorshipId
+            });
+
+            var result = await _sponsorshipService.Update(sponsorshipId, newSponsorship);
+
+            _sponsorshipRepositoryMock.Verify(x => x.Update(sponsorshipId, It.IsAny<Sponsorship>()), Times.Once);
+            _sponsorshipRepositoryMock.Verify(x => x.GetById(sponsorshipId), Times.AtLeastOnce);
+            Assert.That(result.Id, Is.EqualTo(sponsorshipId));
+        }
+
+        [Test, AutoData]
+        public void Update_SponsorshipIdNotFound_ThrowsException(Sponsorship sponsorship)
+        {
+            _sponsorshipRepositoryMock.Setup(x => x.GetById(It.IsAny<int>())).ReturnsAsync(value: null);
+
+            Assert.That(async () => await _sponsorshipService.Update(It.IsAny<int>(), sponsorship),
+                Throws.Exception.TypeOf<SponsorshipNotFound>());
+
+            _sponsorshipRepositoryMock.Verify(x => x.Update(It.IsAny<int>(), sponsorship), Times.Never);
+        }
+
+        [Test]
+        public void GetById_SponsorshipIdNotFound_ThrowsException()
+        {
+            _sponsorshipRepositoryMock.Setup(x => x.GetById(It.IsAny<int>())).ReturnsAsync(value: null);
+
+            Assert.That(async () => await _sponsorshipService.GetById(It.IsAny<int>()),
+                Throws.Exception.TypeOf<SponsorshipNotFound>());
+        }
+
+        [Test]
+        [TestCase(2)]
+        public async Task Delete_ValidSponsorshipId_DeletesSponsorship(int sponsorship)
+        {
+            _sponsorshipRepositoryMock.Setup(x => x.GetById(sponsorship)).ReturnsAsync(new Sponsorship
+            {
+                Id = sponsorship
+            });
+
+            var result = await _sponsorshipService.Delete(sponsorship);
+
+            _sponsorshipRepositoryMock.Verify(x => x.Delete(sponsorship), Times.Once);
+            _sponsorshipRepositoryMock.Verify(x => x.GetById(sponsorship), Times.Once);
+        }
+
+        [Test]
+        public void Delete_SponsorshipIdNotFound_ThrowsException()
+        {
+            _sponsorshipRepositoryMock.Setup(x => x.GetById(It.IsAny<int>())).ReturnsAsync(value: null);
+
+            Assert.That(async () => await _sponsorshipService.Delete(It.IsAny<int>()),
+                Throws.Exception.TypeOf<SponsorshipNotFound>());
+
+            _sponsorshipRepositoryMock.Verify(x => x.Delete(It.IsAny<int>()), Times.Never);
         }
     }
 }

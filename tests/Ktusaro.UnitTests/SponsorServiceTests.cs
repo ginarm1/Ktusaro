@@ -67,7 +67,7 @@ namespace Ktusaro.UnitTests
 
         [Test]
         [TestCase(2)]
-        public async Task Update_ValidEventData_UpdatesEvent(int sponsorId)
+        public async Task Update_ValidSponsorData_UpdatesSponsor(int sponsorId)
         {
             var allSponsors = new List<Sponsor>
             {

@@ -54,5 +54,14 @@ namespace Ktusaro.Repositories.Repositories
 
             return updatedSponsorshipId;
         }
+
+        public async Task<int> Delete(int id)
+        {
+            string deleteQuery = SponsorshipRepositoryCommands.Delete();
+
+            var deletedSponsorshipId = await _connection.ExecuteScalarAsync<int>(deleteQuery, new { Id = id });
+
+            return deletedSponsorshipId;
+        }
     }
 }
