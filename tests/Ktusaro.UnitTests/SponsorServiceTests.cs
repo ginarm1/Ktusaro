@@ -47,7 +47,7 @@ namespace Ktusaro.UnitTests
                 new Sponsor
                 {
                     Id = 1,
-                    Name = "Red Bull",
+                    Name = "Green Bull",
                     CompanyType = CompanyType.UAB
                 },
                 new Sponsor
@@ -74,7 +74,7 @@ namespace Ktusaro.UnitTests
                 new Sponsor
                 {
                     Id = 1,
-                    Name = "Red Bull",
+                    Name = "Green Bull",
                     CompanyType = CompanyType.UAB
                 },
                 new Sponsor

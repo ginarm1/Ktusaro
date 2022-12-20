@@ -3,7 +3,6 @@ using Ktusaro.Core.Exceptions;
 using Ktusaro.Core.Interfaces.Repositories;
 using Ktusaro.Core.Models;
 using Ktusaro.Services.Services;
-using Ktusaro.WebApp.Dtos;
 using Moq;
 using NUnit.Framework;
 using System.Collections.Generic;
