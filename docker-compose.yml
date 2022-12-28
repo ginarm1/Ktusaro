@@ -19,7 +19,7 @@ services:
       timeout: 5s
       retries: 5
   liquibase:
-    build: ./Ktusaro.Backend/liquibase/
+    build: ./liquibase/
     depends_on:
       #CHANGE 2: it prevents issuing a request while the server is starting to depend on the healthy status of postgres-db 
       postgres:
