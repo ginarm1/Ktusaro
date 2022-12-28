@@ -11,6 +11,7 @@ namespace Ktusaro.WebApp
             services.AddTransient<EventService>();
             services.AddTransient<SponsorService>();
             services.AddTransient<SponsorshipService>();
+            services.AddTransient<UserService>();
         }
     }
 }

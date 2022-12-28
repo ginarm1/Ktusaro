@@ -19,6 +19,9 @@ namespace Ktusaro.WebApp.MappingProfiles
             CreateMap<Sponsorship, SponsorshipResponse>().ReverseMap();
             CreateMap<CreateSponsorshipRequest, Sponsorship>();
 
+            CreateMap<User, UserResponse>().ReverseMap();
+            CreateMap<CreateUserRegister, User>();
+            CreateMap<CreateUserLogin, User>();
         }
     }
 }
