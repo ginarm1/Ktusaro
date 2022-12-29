@@ -75,7 +75,6 @@ namespace Ktusaro.Services.Services
             {
                 if (eventType == Enum.GetName(typeof(EventType), i))
                 {
-
                     eventTypeValue = i;
                     break;
                 }

@@ -25,11 +25,24 @@
         internal static string Create()
         {
             return @"INSERT INTO public.user
-	                     (email,password_hash,password_salt,name,surname,representative)
+	                     (email,password_hash,password_salt,name,surname,role,representative)
                      VALUES 
-                         (@Email,@PasswordHash,@PasswordSalt,@Name,@Surname,@Representative)
+                         (@Email,@PasswordHash,@PasswordSalt,@Name,@Surname,@Role,@Representative)
                      RETURNING id";
         }
 
+        internal static string UpdateRoleByEmail()
+        {
+            return @"UPDATE public.user 
+	                 SET role=@Role
+                     WHERE id=@Id";
+        }
+
+        internal static string UpdateRepresentativeByEmail()
+        {
+            return @"UPDATE public.user 
+	                 SET representative=@Representative
+                     WHERE id=@Id";
+        }
     }
 }

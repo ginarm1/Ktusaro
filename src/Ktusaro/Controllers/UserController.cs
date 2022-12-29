@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
+using Ktusaro.Core.Interfaces.Services;
 using Ktusaro.Core.Models;
 using Ktusaro.Services.Services;
 using Ktusaro.WebApp.Dtos;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Ktusaro.WebApp.Controllers
@@ -19,11 +21,26 @@ namespace Ktusaro.WebApp.Controllers
             _mapper = mapper;
         }
 
-        [HttpGet("users")]
+        [HttpGet("users"), Authorize(Roles = "Admin")]
         public async Task<IActionResult> GetAllUsers()
         {
             var users = await _userService.GetAll();
             return Ok(_mapper.Map<List<User>>(users));
+        }
+
+        [HttpGet("current-user"), Authorize(Roles = "Admin,Unverified")]
+        public async Task<IActionResult> GetCurrentUser()
+        {
+            var user = await _userService.GetCurrentUser();
+            return Ok(_mapper.Map<UserResponse>(user));
+        }
+
+        [HttpPut("user/update")]
+        public async Task<ActionResult<User>> UpdateUserByEmail([FromBody] UpdateUserRequest request)
+        {
+            var user = await _userService.UpdateByEmail(request.Email, request.Role,request.Representative);
+
+            return Ok(_mapper.Map<UserResponse>(user));
         }
 
         [HttpPost("register")]

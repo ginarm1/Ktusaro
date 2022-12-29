@@ -8,18 +8,25 @@
         public byte[] PasswordSalt { get; set; }
         public string Name { get; set; }
         public string Surname { get; set; }
+        public Role Role { get; set; }
         public Representative Representative { get; set; }
     }
 
     public enum Representative
     {
         Infosa = 1,
-        VivatChemija = 2,
+        Vivatchemija = 2,
         Vfsa = 3,
         Esa = 4,
         Fumsa = 5,
         Indi = 6,
         Shm = 7,
         Statius = 8
+    }
+
+    public enum Role
+    {
+        Unverified = 1,
+        Admin = 2
     }
 }

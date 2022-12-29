@@ -6,6 +6,7 @@ namespace Ktusaro.Core.Interfaces.Services
     {
         public Task<List<User>> GetAll();
         public Task<User> GetById(int id);
+        public Task<User> UpdateByEmail(string email, string roleName, string representativeName);
         public Task<User> Register(User user, string password);
         public Task<string> Login(User request, string password);
     }

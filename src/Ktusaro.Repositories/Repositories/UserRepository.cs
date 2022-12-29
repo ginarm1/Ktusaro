@@ -45,5 +45,21 @@ namespace Ktusaro.Repositories.Repositories
             var user = await _connection.QuerySingleOrDefaultAsync<User>(selectQuery, new { Email = email });
             return user;
         }
+
+        public async Task ChangeRoleByEmail(string email, int roleValue)
+        {
+            var user = await GetByEmail(email);
+            string updateQuery = UserRepositoryCommands.UpdateRoleByEmail();
+
+            await _connection.ExecuteScalarAsync(updateQuery, new { user.Id, Role = roleValue});
+        }
+
+        public async Task ChangeRepresentativeByEmail(string email, int representativeValue)
+        {
+            var user = await GetByEmail(email);
+            string updateQuery = UserRepositoryCommands.UpdateRepresentativeByEmail();
+
+            await _connection.ExecuteScalarAsync(updateQuery, new { user.Id, Representative = representativeValue });
+        }
     }
 }
