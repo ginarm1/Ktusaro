@@ -172,6 +172,11 @@ namespace Ktusaro.Services.Services
 
         public async Task<string> Login(User request, string? password)
         {
+            if (!request.Email.Contains('@') || !request.Email.Contains('.'))
+            {
+                throw new UserEmailFormatInvalid();
+            }
+
             var user = await _userRepository.GetByEmail(request.Email);
 
             if (user == null)
@@ -204,6 +209,11 @@ namespace Ktusaro.Services.Services
             if (await _userRepository.GetByEmail(request.Email) != null)
             {
                 throw new UserAlreadyExists();
+            }
+
+            if (!request.Email.Contains('@') || !request.Email.Contains('.'))
+            {
+                throw new UserEmailFormatInvalid();
             }
 
             if (password != null)
