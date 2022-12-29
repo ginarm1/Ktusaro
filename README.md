@@ -26,3 +26,14 @@ docker compose up -d
 This will setup your Postgre database.
 
 To your localhost URL add: /swagger/index.html
+
+# Authorization
+
+if you want to see all users, you need to login as administrator. You can do that following these steps:
+
+1. Login. Enter email - gintaras@gmail.com, password - admin
+2. Copy JWT token
+3. Click Authorize button and write: bearer yourJwtToken
+4. Submit
+
+Now you are authorized as an admin
