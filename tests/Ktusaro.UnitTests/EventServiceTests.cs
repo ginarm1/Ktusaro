@@ -15,6 +15,7 @@ namespace Ktusaro.UnitTests
     {
         private Mock<IEventRepository> _eventRepositoryMock;
         private EventService _eventService;
+
         [SetUp]
         public void Setup()
         {

@@ -1,7 +1,6 @@
 ﻿using AutoFixture.NUnit3;
 using Ktusaro.Core.Exceptions;
 using Ktusaro.Core.Interfaces.Repositories;
-using Ktusaro.Core.Interfaces.Services;
 using Ktusaro.Core.Models;
 using Ktusaro.Services.Services;
 using Moq;
