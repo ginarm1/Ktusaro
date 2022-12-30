@@ -1,6 +1,4 @@
-﻿using Ktusaro.Core.Models;
-
-namespace Ktusaro.WebApp.Dtos
+﻿namespace Ktusaro.WebApp.Dtos
 {
     public class SponsorResponse
     {

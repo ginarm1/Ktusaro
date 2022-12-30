@@ -24,7 +24,7 @@ namespace Ktusaro.Services.Services
 
             if (sponsorId != 0)
             {
-                var sponsor = await _sponsorRepository.GetById((int) sponsorId);
+                var sponsor = await _sponsorRepository.GetById(sponsorId);
 
                 if (sponsor == null)
                 {
@@ -36,7 +36,7 @@ namespace Ktusaro.Services.Services
 
             if (eventId != 0)
             {
-                var @event = await _eventRepository.GetById((int)eventId);
+                var @event = await _eventRepository.GetById(eventId);
 
                 if (@event == null)
                 {
@@ -44,6 +44,11 @@ namespace Ktusaro.Services.Services
                 }
 
                 sponsorships = sponsorships.Where(s => s.EventId == eventId).ToList();
+            }
+
+            if (sponsorId != 0 && eventId != 0)
+            {
+                sponsorships = sponsorships.Where(s => s.SponsorId == sponsorId && s.EventId == eventId).ToList();
             }
 
             return sponsorships;

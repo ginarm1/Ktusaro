@@ -25,7 +25,7 @@ namespace Ktusaro.WebApp.Controllers
         public async Task<IActionResult> GetAllUsers()
         {
             var users = await _userService.GetAll();
-            return Ok(_mapper.Map<List<User>>(users));
+            return Ok(_mapper.Map<List<UserResponse>>(users));
         }
 
         [HttpGet("current-user"), Authorize(Roles = "Admin,Unverified")]

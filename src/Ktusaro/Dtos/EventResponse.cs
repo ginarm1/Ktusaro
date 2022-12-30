@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace Ktusaro.WebApp.Dtos
+﻿namespace Ktusaro.WebApp.Dtos
 {
     public class EventResponse
     {

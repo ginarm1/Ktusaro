@@ -22,6 +22,8 @@ namespace Ktusaro.WebApp.MappingProfiles
             CreateMap<User, UserResponse>().ReverseMap();
             CreateMap<CreateUserRegister, User>();
             CreateMap<CreateUserLogin, User>();
+
+            CreateMap<EventMember, EventMemberResponse>().ReverseMap();
         }
     }
 }
