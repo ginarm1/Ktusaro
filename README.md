@@ -32,7 +32,7 @@ To your localhost URL add: /swagger/index.html
 Check if you have in Microsoft Services  stopped postgresql-x64-14:
 
 1. Search Services in Microsoft searchbar.
-2. Look for postgresql-x64-14. It might have status "Running". If it is, make status "Stop"
+2. Look for postgresql-x64-14. It might have status "Running". If it is, stop the service (status should be blank)
 
 # Authorization
 
