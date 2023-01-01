@@ -31,10 +31,6 @@ namespace Ktusaro.WebApp.Controllers
             return CreatedAtAction(nameof(GetSponsorsById), new { id = insertedSponsorResponse.Id }, insertedSponsorResponse);
         }
         
-        /// <summary>
-        /// Get sponsors
-        /// </summary>
-        /// <returns></returns>
         [HttpGet("sponsors")]
         public async Task<IActionResult> GetAllSponsors()
         {

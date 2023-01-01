@@ -6,5 +6,6 @@ namespace Ktusaro.Core.Interfaces.Services
     {
         public Task<List<EventMember>> GetAll(bool? isEventCoordinator,int eventId, int userId);
         public Task<EventMember> GetById(int id);
+        public Task<EventMember> Create(EventMember eventMember);
     }
 }

@@ -85,6 +85,35 @@ namespace Ktusaro.Services.Services
             return eventMember;
         }
 
+        public async Task<EventMember> Create(EventMember eventMember)
+        {
+            var @event = await _eventRepository.GetById(eventMember.EventId);
+
+            if (@event == null)
+            {
+                throw new EventNotFound();
+            }
+
+            var user = await _userRepository.GetById(eventMember.UserId);
+
+            if (user == null)
+            {
+                throw new UserNotFound();
+            }
+
+            var eventsMembers = await _eventMemberRepository.GetAll();
+
+            if (eventsMembers.Where(em => user.Id == em.UserId && @event.Id == em.EventId).FirstOrDefault() != null)
+            {
+                throw new EventMemberAlreadyExists();
+            }
+
+            var insertedEventMemberId = await _eventMemberRepository.Create(eventMember);
+            var insertedEventMember = await _eventMemberRepository.GetById(insertedEventMemberId);
+
+            return insertedEventMember;
+        }
+
         private List<EventMember> FilterIsCoordinatorNotNull(List<EventMember> eventsMembers, bool isEventCoordinator, int eventId, int userId)
         {
             if (eventId != 0 && userId != 0)

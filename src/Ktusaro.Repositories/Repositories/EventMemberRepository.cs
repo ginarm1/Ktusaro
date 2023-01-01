@@ -15,11 +15,6 @@ namespace Ktusaro.Repositories.Repositories
             _connection = connection;
         }
 
-        public Task<int> Create(EventMember eventMember)
-        {
-            throw new NotImplementedException();
-        }
-
         public async Task<List<EventMember>> GetAll()
         {
             string selectQuery = EventMemberRepositoryCommands.GetAll();
@@ -33,6 +28,15 @@ namespace Ktusaro.Repositories.Repositories
             string selectQuery = EventMemberRepositoryCommands.GetById();
             var eventMemberEntity = await _connection.QuerySingleOrDefaultAsync<EventMember>(selectQuery, new { Id = id });
             return eventMemberEntity;
+        }
+
+        public async Task<int> Create(EventMember eventMember)
+        {
+            string insertQuery = EventMemberRepositoryCommands.Create();
+
+            var insertedSponsorshipId = await _connection.ExecuteScalarAsync<int>(insertQuery, eventMember);
+
+            return insertedSponsorshipId;
         }
     }
 }
