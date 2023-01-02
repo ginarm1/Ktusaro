@@ -38,5 +38,21 @@ namespace Ktusaro.Repositories.Repositories
 
             return insertedSponsorshipId;
         }
+
+        public async Task<int> Update(int id, EventMember eventMember)
+        {
+            string updateQuery = EventMemberRepositoryCommands.Update();
+
+            var updatedSponsorshipId = await _connection.ExecuteScalarAsync<int>(updateQuery,
+                new
+                {
+                    Id = id,
+                    eventMember.IsEventCoordinator,
+                    eventMember.EventId,
+                    eventMember.UserId
+                });
+
+            return updatedSponsorshipId;
+        }
     }
 }

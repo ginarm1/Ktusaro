@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using Ktusaro.Core.Interfaces.Services;
 using Ktusaro.Core.Models;
 using Ktusaro.Services.Services;
 using Ktusaro.WebApp.Dtos;
@@ -29,6 +28,14 @@ namespace Ktusaro.WebApp.Controllers
             var insertedEventMemberResponse = _mapper.Map<EventMemberResponse>(insertedEventMember);
 
             return CreatedAtAction(nameof(GetEventMemberById), new { id = insertedEventMemberResponse.Id }, insertedEventMemberResponse);
+        }
+
+        [HttpPut("eventsmembers/{id}/{isEventCoordinator}/changeEventCoordinator")]
+        public async Task<IActionResult> Update(int id, bool isEventCoordinator)
+        {
+            var updatedEventMember = await _eventMemberService.Update(id, isEventCoordinator);
+
+            return Ok(_mapper.Map<EventMemberResponse>(updatedEventMember));
         }
 
         [HttpGet("eventsmembers")]

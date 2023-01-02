@@ -2,8 +2,6 @@
 using Ktusaro.Core.Interfaces.Repositories;
 using Ktusaro.Core.Interfaces.Services;
 using Ktusaro.Core.Models;
-using Microsoft.IdentityModel.Tokens;
-using System.Collections.Generic;
 
 namespace Ktusaro.Services.Services
 {
@@ -108,6 +106,11 @@ namespace Ktusaro.Services.Services
                 throw new EventMemberAlreadyExists();
             }
 
+            if (eventsMembers.Where(em => @event.Id == em.EventId && em.IsEventCoordinator && eventMember.IsEventCoordinator).FirstOrDefault() != null)
+            {
+                throw new EventCoordinatorAlreadyExists();
+            }
+
             var insertedEventMemberId = await _eventMemberRepository.Create(eventMember);
             var insertedEventMember = await _eventMemberRepository.GetById(insertedEventMemberId);
 
@@ -151,6 +154,35 @@ namespace Ktusaro.Services.Services
             }
 
             return eventsMembers;
+        }
+
+        public async Task<EventMember> Update(int id, bool isEventCoordinator)
+        {
+            var eventsMembers = await _eventMemberRepository.GetAll();
+
+            if (await _eventMemberRepository.GetById(id) == null)
+            {
+                throw new EventMemberNotFound();
+            }
+
+            var eventMember = await _eventMemberRepository.GetById(id);
+
+            if (isEventCoordinator)
+            {
+                var eventCoordinatorsCount = eventsMembers.Where(em => em.EventId == eventMember.EventId && em.IsEventCoordinator).ToList().Count;
+
+                if (eventCoordinatorsCount > 0)
+                {
+                    throw new EventCoordinatorAlreadyExists();
+                }
+            }
+
+            eventMember.IsEventCoordinator = isEventCoordinator;
+
+            var updatedSponsorshipId = await _eventMemberRepository.Update(id, eventMember);
+            var updatedSponsorship = await _eventMemberRepository.GetById(updatedSponsorshipId);
+
+            return updatedSponsorship;
         }
     }
 }
