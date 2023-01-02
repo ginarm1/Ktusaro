@@ -29,5 +29,13 @@
                      WHERE event_id=@EventId AND user_id=@UserId
                      RETURNING id";
         }
+
+        internal static string Delete()
+        {
+            return @"DELETE
+	                FROM public.event_member
+                    WHERE id=@Id
+                    RETURNING id";
+        }
     }
 }

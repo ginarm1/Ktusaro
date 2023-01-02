@@ -8,5 +8,6 @@ namespace Ktusaro.Core.Interfaces.Services
         public Task<EventMember> GetById(int id);
         public Task<EventMember> Create(EventMember eventMember);
         public Task<EventMember> Update(int id, bool isEventCoordinator);
+        public Task<int> Delete(int id);
     }
 }

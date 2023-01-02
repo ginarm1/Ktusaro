@@ -34,16 +34,16 @@ namespace Ktusaro.Repositories.Repositories
         {
             string insertQuery = EventMemberRepositoryCommands.Create();
 
-            var insertedSponsorshipId = await _connection.ExecuteScalarAsync<int>(insertQuery, eventMember);
+            var insertedEventMemberId = await _connection.ExecuteScalarAsync<int>(insertQuery, eventMember);
 
-            return insertedSponsorshipId;
+            return insertedEventMemberId;
         }
 
         public async Task<int> Update(int id, EventMember eventMember)
         {
             string updateQuery = EventMemberRepositoryCommands.Update();
 
-            var updatedSponsorshipId = await _connection.ExecuteScalarAsync<int>(updateQuery,
+            var updatedEventMemberId = await _connection.ExecuteScalarAsync<int>(updateQuery,
                 new
                 {
                     Id = id,
@@ -52,7 +52,16 @@ namespace Ktusaro.Repositories.Repositories
                     eventMember.UserId
                 });
 
-            return updatedSponsorshipId;
+            return updatedEventMemberId;
+        }
+
+        public async Task<int> Delete(int id)
+        {
+            string deleteQuery = EventMemberRepositoryCommands.Delete();
+
+            var deletedEventMemberId = await _connection.ExecuteScalarAsync<int>(deleteQuery, new { Id = id });
+
+            return deletedEventMemberId;
         }
     }
 }

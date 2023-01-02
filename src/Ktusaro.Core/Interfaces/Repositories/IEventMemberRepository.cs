@@ -8,5 +8,6 @@ namespace Ktusaro.Core.Interfaces.Repositories
         public Task<int> Update(int id, EventMember eventMember);
         public Task<List<EventMember>> GetAll();
         public Task<EventMember> GetById(int id);
+        public Task<int> Delete(int id);
     }
 }

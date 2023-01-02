@@ -184,5 +184,17 @@ namespace Ktusaro.Services.Services
 
             return updatedSponsorship;
         }
+
+        public async Task<int> Delete(int id)
+        {
+            if (await _eventMemberRepository.GetById(id) == null)
+            {
+                throw new EventMemberNotFound();
+            }
+
+            var deletedEventMemberId = await _eventMemberRepository.Delete(id);
+
+            return deletedEventMemberId;
+        }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Ktusaro.Core.Interfaces.Services;
 using Ktusaro.Core.Models;
 using Ktusaro.Services.Services;
 using Ktusaro.WebApp.Dtos;
@@ -51,6 +52,14 @@ namespace Ktusaro.WebApp.Controllers
             var eventMember = await _eventMemberService.GetById(id);
 
             return Ok(eventMember);
+        }
+
+        [HttpDelete("eventsmembers/{id}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var deletedEventMemberId = await _eventMemberService.Delete(id);
+
+            return Ok(deletedEventMemberId);
         }
     }
 }
