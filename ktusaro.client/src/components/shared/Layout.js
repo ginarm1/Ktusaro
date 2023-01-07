@@ -15,7 +15,7 @@ export class Layout extends Component {
             <script src="https://use.fontawesome.com/releases/v5.15.4/js/all.js"></script>
         </Helmet>
         <NavMenu />
-        <Container tag="main" className='p-5'>
+        <Container tag="main">
           {this.props.children}
         </Container>
         <Footer/>
