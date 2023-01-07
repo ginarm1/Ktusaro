@@ -5,7 +5,7 @@ import { Footer } from './Footer';
 
 export const Layout = ({children}) => {
     return (
-      <div>
+      <div className=' dark:bg-gray-700 dark:border-gray-700'>
         <Helmet>
             <script src="https://use.fontawesome.com/releases/v5.15.4/js/all.js"></script>
         </Helmet>

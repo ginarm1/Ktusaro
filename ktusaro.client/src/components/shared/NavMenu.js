@@ -9,8 +9,8 @@ export const NavMenu = () => {
   const [theme, setTheme] = useDarkMode();
   return (
     <header>
-      <nav className="flex items-center justify-between flex-wrap bg-white border-gray-200 dark:bg-gray-900 dark:border-gray-700 p-6 pl-10">
-        <div className="flex items-center flex-shrink-0 text-white mr-6">
+      <nav className="flex items-center justify-between flex-wrap bg-gray-200 border-gray-200 dark:bg-gray-900 dark:border-gray-700 p-6 pl-10">
+        <div className="flex items-center flex-shrink-0 text-dark dark:text-white mr-6">
           <a href="/" className="font-semibold text-xl tracking-tight">
               KTU SA RO
           </a>

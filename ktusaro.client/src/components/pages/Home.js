@@ -21,9 +21,6 @@ export const Home = () => {
           <li className={"dark:text-white"}><a href='https://github.com/features/actions'><b>Github Actions</b></a> for continues integration</li>
           <li className={"dark:text-white"}><a href='https://jwt.io/'><b>JWT</b></a> for authorization</li>
         </ul>
-        {/* <button onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}>
-          Toggle Dark Mode
-        </button> */}
       </div>
     );
 }
