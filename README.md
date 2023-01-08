@@ -34,7 +34,19 @@ Check if you have in Microsoft Services  stopped postgresql-x64-14:
 1. Search Services in Microsoft searchbar.
 2. Look for postgresql-x64-14. It might have status "Running". If it is, stop the service (status should be blank)
 
-# Authorization
+# Front-end 
+
+In order for React to work, you'll need to install node modules.
+
+1. In terminal, you need to be in ktusaro.client folder.
+2. Run commands
+
+```
+npm install
+npm start
+```
+
+# Authorization in Swagger
 
 if you want to see all users, you need to login as administrator. You can do that following these steps:
 
