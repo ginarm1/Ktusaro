@@ -1,6 +1,6 @@
 export const Footer  = () => {
     return (
-      <footer className="p-4 bg-gray-200 rounded-lg shadow md:px-6 md:py-8 dark:bg-gray-900">
+      <footer className="p-4 h-60 bg-gray-200 rounded-lg shadow md:px-6 md:py-8 dark:bg-gray-900">
         <div className="flex pl-4 items-center justify-between">
           <a
             href="https://sa.ktu.edu/"

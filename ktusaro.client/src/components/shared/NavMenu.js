@@ -12,7 +12,7 @@ export const NavMenu = () => {
       <nav className="flex items-center justify-between flex-wrap bg-gray-200 border-gray-200 dark:bg-gray-900 dark:border-gray-700 p-6 pl-10">
         <div className="flex items-center flex-shrink-0 text-dark dark:text-white mr-6">
           <a href="/" className="font-semibold text-xl tracking-tight">
-              KTU SA RO
+            KTU SA RO
           </a>
         </div>
         <div className="block lg:hidden">
@@ -36,10 +36,10 @@ export const NavMenu = () => {
           }`}
         >
           <ul className="flex flex-col p-4 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
-          <button
-            title="Toggle Theme"
-            onClick={() => setTheme(theme === "light" ? "dark" : "light")}
-            class="
+            <button
+              title="Toggle Theme"
+              onClick={() => setTheme(theme === "light" ? "dark" : "light")}
+              className="
             w-12 
             h-6 
             rounded-full 
@@ -56,10 +56,10 @@ export const NavMenu = () => {
             dark:focus:ring-blue-600 
             focus:border-transparent
           "
-          >
-            <div
-              id="toggle"
-              class="
+            >
+              <div
+                id="toggle"
+                className="
                 rounded-full 
                 w-4 
                 h-4 
@@ -73,8 +73,8 @@ export const NavMenu = () => {
                 duration-300 
                 ease-out
             "
-            ></div>
-          </button>
+              ></div>
+            </button>
             <NavLink
               tag={Link}
               className="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
