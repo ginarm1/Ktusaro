@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 export const Events = () => {
     const [events, setEvents] = useState([]);
@@ -115,20 +116,20 @@ export const Events = () => {
               onChange={handleFilterEventCoordinatorSurname}
               className="ml-3 w-1/3 py-2 px-3 leading-tight text-gray-700 border rounded-md shadow-sm focus:outline-none focus:shadow-outline-blue focus:border-blue-300"
             />
-            {/* <button type="submit" className="ml-3 py-2 px-4 rounded-md font-medium text-sm text-white dark:bg-gray-700 hover:bg-indigo-500 focus:outline-none focus:bg-indigo-500">Apply Filters</button> */}
           </form>
           <div className='m-8  relative overflow-x-auto shadow-md sm:rounded-lg bg-white'>
             <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
               <thead className='text-xs text-gray-700 uppercase dark:text-gray-400'>
                 <tr>
                   <th scope="col" className="px-6 py-3 bg-gray-50 dark:bg-gray-800">Name</th>
-                  <th scope="col" className="px-6 py-3">Date</th>
+                  <th scope="col" className="px-6 py-3 sm:w-1/6">Date</th>
                   <th scope="col" className="px-6 py-3 bg-gray-50 dark:bg-gray-800">Location</th>
                   <th scope="col" className="px-6 py-3">Description</th>
                   <th scope="col" className="px-6 py-3 bg-gray-50 dark:bg-gray-800">Event Coordinator</th>
                   <th scope="col" className="px-6 py-3">Planned people</th>
                   <th scope="col" className="px-6 py-3 bg-gray-50 dark:bg-gray-800">Showed people</th>
                   <th scope="col" className="px-6 py-3">Type</th>
+                  <th scope="col" className="px-6 py-3 bg-gray-50 dark:bg-gray-800"></th>
                 </tr>
               </thead>
               <tbody>
@@ -141,7 +142,7 @@ export const Events = () => {
                   <tr key={event.id} className="border-b border-gray-200 dark:border-gray-700">
                     <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">{event.name}</th>
                     <td className="px-6 py-4">
-                      {event.startDate} - {event.endDate}
+                      {event.startDate} / {event.endDate}
                     </td>
                     <td className="px-6 py-4 bg-gray-50 dark:bg-gray-800">{event.location}</td>
                     <td className="px-6 py-4">{event.description}</td>
@@ -151,6 +152,12 @@ export const Events = () => {
                     <td className="px-6 py-4">{event.plannedPeopleCount}</td>
                     <td className="px-6 py-4 bg-gray-50 dark:bg-gray-800">{event.showedPeopleCount}</td>
                     <td className="px-6 py-4">{event.eventType}</td>
+                    <td className="px-6 py-4 bg-gray-50 dark:bg-gray-800">
+                      <Link key={event.id}  to={`/events/${event.id}`} className="text-white bg-gray-800 border border-gray-300 focus:outline-none 
+                      hover:bg-gray-100 hover:text-black focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2
+                      dark:bg-gray-800 dark:text-white  dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"
+                      >Edit</Link>
+                    </td>
                   </tr>
                 ))}
               </tbody>
@@ -159,7 +166,6 @@ export const Events = () => {
         </div>
       );
     }
-  
     return (
       <div>
         <p id="tabelLabel" className='my-7 ml-10 text-3xl font-bold tracking-tight text-gray-900 dark:text-white'>Events</p>

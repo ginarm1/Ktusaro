@@ -34,7 +34,20 @@ namespace Ktusaro.WebApp.Controllers
         public async Task<IActionResult> GetAllEvents([FromQuery] EventFilterParameters parameters)
         {
             var eventsEntity = await _eventService.GetAll(parameters.Id,parameters.EventType);
-            return Ok(_mapper.Map<List<EventResponse>>(eventsEntity));
+            var events = _mapper.Map<List<EventResponse>>(eventsEntity);
+
+            foreach (var @event in events)
+            {
+                var dateWithTime =  DateTime.Parse(@event.StartDate);
+                var dateOnly = new DateOnly(dateWithTime.Year,dateWithTime.Month,dateWithTime.Day);
+                @event.StartDate = dateOnly.ToString("yyyy-MM-dd");
+
+                dateWithTime = DateTime.Parse(@event.EndDate);
+                dateOnly = new DateOnly(dateWithTime.Year, dateWithTime.Month, dateWithTime.Day);
+                @event.EndDate = dateOnly.ToString("yyyy-MM-dd");
+            }
+
+            return Ok(events);
         }
 
         private async Task<EventResponse> GetEventById(int id)

@@ -1,5 +1,6 @@
 import { NotFound } from "./components/exceptions/NotFound";
-import { Events } from "./components/pages/Events";
+import { EditEvent } from "./components/pages/events/EditEvent";
+import { Events } from "./components/pages/events/Events";
 import { Home } from "./components/pages/Home";
 
 const AppRoutes = [
@@ -10,6 +11,10 @@ const AppRoutes = [
   {
     path: '/events',
     element: <Events />
+  },
+  {
+    path: '/events/:id',
+    element: <EditEvent />
   },
   {
     path: '*',
