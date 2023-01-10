@@ -39,9 +39,6 @@ namespace Ktusaro.WebApp.Dtos
         public bool IsCanceled { get; set; }
 
         [Required]
-        public bool IsLive { get; set; }
-
-        [Required]
         [Range(0, 99999)]
         [DisplayName("Planuojamas dalyvių kiekis")]
         public int? PlannedPeopleCount { get; set; }

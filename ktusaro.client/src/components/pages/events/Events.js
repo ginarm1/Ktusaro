@@ -1,6 +1,25 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
+  // function deleteEvent(event) {
+  //   try {
+  //     const response = fetch(`https://localhost:7107/api/events/${event.id}`, {
+  //       method: 'DELETE',
+  //       headers: {
+  //         'Content-Type': 'application/json',
+  //       },
+  //       body: JSON.stringify({
+  //         id: event.id
+  //       }),
+  //     });
+  //     const data = response.json();
+  //     console.log('Success:', data);
+
+  //   } catch (error) {
+  //     console.error('Error:', error);
+  //   }
+  // }
+
 export const Events = () => {
     const [events, setEvents] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -157,6 +176,10 @@ export const Events = () => {
                       hover:bg-gray-100 hover:text-black focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2
                       dark:bg-gray-800 dark:text-white  dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"
                       >Edit</Link>
+                      <Link  to={`/events`} className="text-white bg-red-300 border border-gray-300 focus:outline-none 
+                      hover:bg-red-400 hover:text-black focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2
+                      dark:bg-red-900 dark:text-white  dark:border-gray-600 dark:hover:bg-red-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"
+                      >Delete</Link>
                     </td>
                   </tr>
                 ))}
