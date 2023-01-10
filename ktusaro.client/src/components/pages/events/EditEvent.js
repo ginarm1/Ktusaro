@@ -39,10 +39,6 @@ export const EditEvent = (props) => {
     let newErrors = [];
 
     const pattern = /[^a-zA-Z ]/;
-    
-    if (pattern.test(editEvent.name)) {
-        newErrors.push("Name should only contain letters and spaces");
-    }
 
     if(editEvent.startDate > editEvent.endDate){
         newErrors.push("Stard date can't be bigger than end date");

@@ -1,26 +1,8 @@
-import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-
-  // function deleteEvent(event) {
-  //   try {
-  //     const response = fetch(`https://localhost:7107/api/events/${event.id}`, {
-  //       method: 'DELETE',
-  //       headers: {
-  //         'Content-Type': 'application/json',
-  //       },
-  //       body: JSON.stringify({
-  //         id: event.id
-  //       }),
-  //     });
-  //     const data = response.json();
-  //     console.log('Success:', data);
-
-  //   } catch (error) {
-  //     console.error('Error:', error);
-  //   }
-  // }
+import { useState, useEffect, } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 
 export const Events = () => {
+    const navigate = useNavigate();
     const [events, setEvents] = useState([]);
     const [loading, setLoading] = useState(true);
     const [filterName, setFilterName] = useState('');
@@ -56,6 +38,26 @@ export const Events = () => {
     
     function handlePageChange(page) {
       setCurrentPage(page);
+    }
+
+    const deleteEvent = async (eventId,e)  => {
+      e.preventDefault();
+
+      try {
+        fetch(`https://localhost:7107/api/events/${eventId}`, {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            id: eventId
+          }),
+        });
+      } catch (error) {
+        console.error("Error:", error);
+      }
+  
+      navigate("/events");
     }
     
     // Render pagination buttons
@@ -156,6 +158,7 @@ export const Events = () => {
                       .filter(event => event.name.toLowerCase().includes(filterName.toLowerCase()))
                       .filter(event => event.coordinatorName.toLowerCase().includes(filterEventCoordinatorName.toLowerCase()))
                       .filter(event => event.coordinatorSurname.toLowerCase().includes(filterEventCoordinatorSurname.toLowerCase()))
+                      .sort((a,b) => b.id - a.id)
                       .slice((currentPage - 1) * eventsPerPage, currentPage * eventsPerPage)
                       .map((event) => (
                   <tr key={event.id} className="border-b border-gray-200 dark:border-gray-700">
@@ -176,10 +179,10 @@ export const Events = () => {
                       hover:bg-gray-100 hover:text-black focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2
                       dark:bg-gray-800 dark:text-white  dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"
                       >Edit</Link>
-                      <Link  to={`/events`} className="text-white bg-red-300 border border-gray-300 focus:outline-none 
-                      hover:bg-red-400 hover:text-black focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2
-                      dark:bg-red-900 dark:text-white  dark:border-gray-600 dark:hover:bg-red-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"
-                      >Delete</Link>
+                        <Link  to={`/events`} onClick={(e) => deleteEvent(event.id,e)} className="text-white bg-red-300 border border-gray-300 focus:outline-none 
+                        hover:bg-red-400 hover:text-black focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2
+                        dark:bg-red-900 dark:text-white  dark:border-gray-600 dark:hover:bg-red-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"
+                        >Delete</Link>                      
                     </td>
                   </tr>
                 ))}
