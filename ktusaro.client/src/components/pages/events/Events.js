@@ -1,46 +1,46 @@
 import { useState, useEffect, } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 
 export const Events = () => {
-    const navigate = useNavigate();
     const [events, setEvents] = useState([]);
     const [loading, setLoading] = useState(true);
     const [filterName, setFilterName] = useState('');
     const [filterEventCoordinatorName, setEventCoordinatorName] = useState('');
     const [filterEventCoordinatorSurname, setEventCoordinatorSurname] = useState('');
+    const [isDeleted, setIsDeleted] = useState(false);
 
     const [currentPage, setCurrentPage] = useState(1);
     const [eventsPerPage] = useState(10);
 
     // Change page
-    const paginate = pageNumber => setCurrentPage(pageNumber);
+    const Paginate = pageNumber => setCurrentPage(pageNumber);
 
     // Get current events
     const indexOfLastEvent = currentPage * eventsPerPage;
     const indexOfFirstEvent = indexOfLastEvent - eventsPerPage;
     const currentEvents = events.slice(indexOfFirstEvent, indexOfLastEvent);
 
-    function handleFilterNameChange(event) {
+    const HandleFilterNameChange = (event) => {
       setFilterName(event.target.value);
     }
     
-    function handleFilterEventCoordinatorName(event) {
+    const HandleFilterEventCoordinatorName = (event) => {
       setEventCoordinatorName(event.target.value);
     }
     
-    function handleFilterEventCoordinatorSurname(event) {
+    const HandleFilterEventCoordinatorSurname = (event) => {
       setEventCoordinatorSurname(event.target.value);
     }
     
-    function handleFilterSubmit(event) {
+    const HandleFilterSubmit = (event) => {
       event.preventDefault();
     }
     
-    function handlePageChange(page) {
+    const HandlePageChange = (page) => {
       setCurrentPage(page);
     }
 
-    const deleteEvent = async (eventId,e)  => {
+    const DeleteEvent = async (eventId,e)  => {
       e.preventDefault();
 
       try {
@@ -53,12 +53,18 @@ export const Events = () => {
             id: eventId
           }),
         });
+
+        setIsDeleted(true);
       } catch (error) {
         console.error("Error:", error);
       }
-  
-      navigate("/events");
     }
+
+    useEffect(() => {
+      if (isDeleted) {
+        window.location.reload();
+      }
+    }, [isDeleted]);
     
     // Render pagination buttons
     const pageNumbers = [];
@@ -68,13 +74,13 @@ export const Events = () => {
 
     const renderPageNumbers = pageNumbers.map(number => {
       return (
-        <button key={number} onClick={() => paginate(number)} className="mx-1 py-1 px-3 rounded-md font-medium text-sm text-white dark:bg-gray-500 hover:bg-gray-400 focus:outline-none focus:bg-indigo-500">
+        <button key={number} onClick={() => Paginate(number)} className="mx-1 py-1 px-3 rounded-md font-medium text-sm text-white dark:bg-gray-500 hover:bg-gray-400 focus:outline-none focus:bg-indigo-500">
           {number}
         </button>
       );
     });
 
-    const paginationDiv = (currentPage,pageNumbers) => {
+    const PaginationDiv = (currentPage,pageNumbers) => {
       if(currentPage === 1){
           return (
               <div className="my-4 flex justify-center items-center">
@@ -87,7 +93,7 @@ export const Events = () => {
           <div className="my-4 flex justify-center items-center">
             <button
               disabled={currentPage === 10}
-              onClick={() => handlePageChange(currentPage - 1)}
+              onClick={() => HandlePageChange(currentPage - 1)}
               className="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 dark:bg-gray-100  text-sm leading-5 font-medium text-gray-500 hover:text-gray-400 focus:z-10 focus:outline-none"
             >
               Previous
@@ -95,7 +101,7 @@ export const Events = () => {
             <ul className="mx-3 rounded-md bg-gray-300 dark:bg-gray-700">{renderPageNumbers}</ul>
             <button
               disabled={currentPage === pageNumbers.length}
-              onClick={() => handlePageChange(currentPage + 1)}
+              onClick={() => HandlePageChange(currentPage + 1)}
               className="relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 dark:bg-gray-100  text-sm leading-5 font-medium text-gray-500 hover:text-gray-400 focus:z-10 focus:outline-none"
             >
               Next
@@ -106,19 +112,19 @@ export const Events = () => {
     }
 
     useEffect(() => {
-      populateEventsData();
+      FetchEventsData();
     }, []);
   
-    function renderEventsTable(events) {
+    function RenderEventsTable(events) {
       return (
         <div>
-          <form onSubmit={handleFilterSubmit} className="flex md:w-2/3 items-center mx-10 py-3 px-5 sm:w-full bg-gray-50 dark:bg-gray-800 rounded-md dark:rounded-none shadow-md dark:shadow-none">
+          <form onSubmit={HandleFilterSubmit} className="flex md:w-2/3 items-center mx-10 py-3 px-5 sm:w-full bg-gray-50 dark:bg-gray-800 rounded-md dark:rounded-none shadow-md dark:shadow-none">
             <label htmlFor="filterName" className="block font-medium  text-sm text-gray-700 dark:text-gray-50">Filter by Name:</label>
             <input
               type="text"
               id="filterName"
               value={filterName}
-              onChange={handleFilterNameChange}
+              onChange={HandleFilterNameChange}
               className="ml-3 w-1/3 py-2 px-3 leading-tight text-gray-700 border rounded-md shadow-sm focus:outline-none focus:shadow-outline-blue focus:border-blue-300"
             />
           <label htmlFor="filterEventCoordinatorName" className="hidden md:block pl-5 font-medium  text-sm text-gray-700 dark:text-gray-50">Coordinator name:</label>
@@ -126,7 +132,7 @@ export const Events = () => {
               type="text"
               id="filterEventCoordinatorName"
               value={filterEventCoordinatorName}
-              onChange={handleFilterEventCoordinatorName}
+              onChange={HandleFilterEventCoordinatorName}
               className="hidden md:block ml-3 w-1/3 py-2 px-3 leading-tight text-gray-700 border rounded-md shadow-sm focus:outline-none focus:shadow-outline-blue focus:border-blue-300"
             />
           <label htmlFor="filterEventCoordinatorSurname" className="block pl-5 font-medium  text-sm text-gray-700 dark:text-gray-50">Coordinator surname:</label>
@@ -134,7 +140,7 @@ export const Events = () => {
               type="text"
               id="filterEventCoordinatorSurname"
               value={filterEventCoordinatorSurname}
-              onChange={handleFilterEventCoordinatorSurname}
+              onChange={HandleFilterEventCoordinatorSurname}
               className="ml-3 w-1/3 py-2 px-3 leading-tight text-gray-700 border rounded-md shadow-sm focus:outline-none focus:shadow-outline-blue focus:border-blue-300"
             />
           </form>
@@ -179,7 +185,7 @@ export const Events = () => {
                       hover:bg-gray-100 hover:text-black focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2
                       dark:bg-gray-800 dark:text-white  dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"
                       >Edit</Link>
-                        <Link  to={`/events`} onClick={(e) => deleteEvent(event.id,e)} className="text-white bg-red-300 border border-gray-300 focus:outline-none 
+                        <Link  to={`/events`} onClick={(e) => DeleteEvent(event.id,e)} className="text-white bg-red-300 border border-gray-300 focus:outline-none 
                         hover:bg-red-400 hover:text-black focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2
                         dark:bg-red-900 dark:text-white  dark:border-gray-600 dark:hover:bg-red-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"
                         >Delete</Link>                      
@@ -195,12 +201,12 @@ export const Events = () => {
     return (
       <div>
         <p id="tabelLabel" className='my-7 ml-10 text-3xl font-bold tracking-tight text-gray-900 dark:text-white'>Events</p>
-          {loading ? <p className='mt-7 ml-10'><em>Loading...</em></p> : renderEventsTable(events)}
-          {paginationDiv(currentPage, pageNumbers)}
+          {loading ? <p className='mt-7 ml-10'><em>Loading...</em></p> : RenderEventsTable(events)}
+          {PaginationDiv(currentPage, pageNumbers)}
       </div>
     );
   
-    async function populateEventsData() {
+    async function FetchEventsData() {
       const response = await fetch('https://localhost:7107/api/events');
       const data = await response.json();
       setEvents(data);

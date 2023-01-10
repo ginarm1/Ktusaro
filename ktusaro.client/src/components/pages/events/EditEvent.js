@@ -18,10 +18,10 @@ export const EditEvent = (props) => {
   ];
 
   useEffect(() => {
-    fetchEventData();
+    FetchEventData();
   }, [id]);
 
-  const fetchEventData = async () => {
+  const FetchEventData = async () => {
     const response = await fetch(`https://localhost:7107/api/events?Id=${id}`);
     const data = await response.json();
     setEditEvent(data[0]);
@@ -33,7 +33,7 @@ export const EditEvent = (props) => {
     data[0].eventType = type.value;
   };
 
-  const handleSubmit = async (e) => {
+  const HandleSubmit = async (e) => {
     e.preventDefault();
 
     let newErrors = [];
@@ -65,7 +65,7 @@ export const EditEvent = (props) => {
         return;
     }
 
-    updateEvent(editEvent);
+    UpdateEvent(editEvent);
   };
 
   const Dropdown = () => {
@@ -89,7 +89,7 @@ export const EditEvent = (props) => {
     );
   };
 
-  const updateEvent = (tempEvent) => {
+  const UpdateEvent = (tempEvent) => {
     try {
       fetch(`https://localhost:7107/api/events/${tempEvent.id}`, {
         method: "PUT",
@@ -117,10 +117,10 @@ export const EditEvent = (props) => {
     navigate("/events");
   };
 
-  function renderEventData() {
+  function RenderEventData() {
     return (
       <div>
-        <form className="mx-10" onSubmit={handleSubmit}>
+        <form className="mx-10" onSubmit={HandleSubmit}>
           <div className="grid md:grid-cols-3 md:gap-6">
             <div className="relative z-0 w-full pr-10 mb-6 group">
               <input
@@ -410,7 +410,7 @@ export const EditEvent = (props) => {
           <em>Loading...</em>
         </p>
       ) : (
-        renderEventData()
+        RenderEventData()
       )}
     </div>
   );
