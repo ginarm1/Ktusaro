@@ -18,7 +18,8 @@ export const Events = () => {
   // Get current events
   const indexOfLastEvent = currentPage * eventsPerPage;
   const indexOfFirstEvent = indexOfLastEvent - eventsPerPage;
-  const currentEvents = events.slice(indexOfFirstEvent, indexOfLastEvent);
+  
+  events.slice(indexOfFirstEvent, indexOfLastEvent);
 
   const HandleFilterNameChange = (event) => {
     setFilterName(event.target.value);

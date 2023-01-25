@@ -1,10 +1,12 @@
 import React from "react";
 import { NavLink } from "reactstrap";
 import { Link } from "react-router-dom";
-import useDarkMode from "../hooks/useDarkMode";
+import useDarkMode from "../hooks/useDarkMode.tsx";
 import "./NavMenu.css";
 
-export const NavMenu = () => {
+interface IProps {}
+
+export const NavMenu: React.FC<IProps>  = () => {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
   const [theme, setTheme] = useDarkMode();
   return (

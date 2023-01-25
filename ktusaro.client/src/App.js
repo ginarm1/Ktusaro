@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import AppRoutes from './AppRoutes';
-import { Layout } from './components/shared/Layout';
+import { Layout } from './components/shared/Layout.tsx';
 
 export default class App extends Component {
   render() {
